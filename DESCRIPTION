@@ -1,0 +1,39 @@
+Package: covidBR
+Title: Import and Process Data from the Brazilian COVID-19 Portal
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(
+    given = "Ariana",
+    family = "Moura Cabral",
+    email = "arianacabral57@gmail.com",
+    role = c("aut", "cre"),
+    comment = c(ORCID = "0000-0002-9804-353X")),
+    person(
+    given = "Adriano",
+    family = "de Oliveira Andrade",
+    email = "adriano@ufu.br",
+    role = c("aut"),
+    comment = c(ORCID = "0000-0002-5689-6606")))
+Description: Tool for import and process data from Brazilian COVID-19 Portal (<https://covid.saude.gov.br>). The Brazilian government keeps an extensive database for sharing information on the COVID-19 epidemiological condition. Annually, the Ministry of Health (Ministerio da Saude) updates and publicly disseminates these data. Some information that can be obtained: cases, deaths, and recoveries for each Brazilian region, municipality and state.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Imports: 
+    archive,
+    data.table,
+    dplyr,
+    httr,
+    janitor,
+    magrittr,
+    purrr,
+    readr,
+    stringi,
+    stringr
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Depends: 
+    R (>= 2.10)
+LazyData: true
+LazyDataCompression: bzip2

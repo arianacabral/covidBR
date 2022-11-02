@@ -1,0 +1,41 @@
+#' Database from the Brazilian COVID-19 Portal
+#'
+#' A database containing information from Brazil on the COVID-19
+#' epidemiological condition. It provides information on the number of cases,
+#'  deaths, and recoveries for each Brazilian region, municipality, and state.
+#'
+#' @format A data table with 17 variables and multiple rows:
+#' \describe{
+#'   \item{regiao}{Regions of Brazil}
+#'   \item{estado}{Federative units (UF) of Brazil}
+#'   \item{municipio}{Municipalities of Brazil}
+#'   \item{coduf}{UF code}
+#'   \item{codmun}{Brazilian municipality code}
+#'   \item{cod_regiao_saude}{Health region code}
+#'   \item{nome_regiao_saude}{Health region name}
+#'   \item{data}{Date}
+#'   \item{semana_epi}{Epidemiological week}
+#'   \item{populacao_tcu2019}{Population estimates sent to the TCU (2019)}
+#'   \item{casos_acumulado}{Total number of confirmed cases of COVID-19 that
+#'   were registered by the Municipal and State Health Departments in
+#'   the period considered.}
+#'   \item{casos_novos}{Number of new confirmed cases of COVID-19 that were
+#'   registered by the Municipal and State Health Departments in relation to
+#'   the previous day}
+#'   \item{obitos_acumulado}{Total number of deaths from COVID-19 that
+#'   were registered by the Municipal and State Health Departments in
+#'   the period considered.}
+#'   \item{obitos_novos}{Number of new deaths confirmed from COVID-19 that were
+#'   registered by the Municipal and State Health Departments in relation to
+#'   the previous day.}
+#'   \item{recuperadosnovos}{Number of new COVID-19 recoveries that were
+#'   registered by the Municipal and State Health Departments in relation to
+#'   the previous day.}
+#'   \item{em_acompanhamento_novos}{Number of new COVID-19 hospitalizations
+#'   that were registered by the Municipal and State Health Departments in
+#'   relation to the previous day.}
+#'   \item{interior_metropolitana}{Label for inland or metropolitan region}
+#' }
+#' @source \url{https://covid.saude.gov.br}
+
+"covidBR"

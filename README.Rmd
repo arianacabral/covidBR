@@ -1,0 +1,104 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = FALSE,
+  error = FALSE,
+  message = FALSE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# covidBR
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/arianacabral/covidBR/workflows/R-CMD-check/badge.svg)](https://github.com/arianacabral/covidBR/actions)
+<!-- badges: end -->
+
+The `covidBR` R package, written by [Ariana Moura Cabral](https://orcid.org/0000-0002-9804-353X) and [Adriano de Oliveira Andrade](https://orcid.org/0000-0002-5689-6606), was built to extract data from the Brazilian [COVID-19 Portal](https://covid.saude.gov.br) and exported as `CSV` files.
+
+### Installation
+
+You can install the development version of covidBR from [GitHub](https://github.com/) with:
+
+```{r eval = FALSE, include = TRUE}
+# install.packages("devtools")
+devtools::install_github("arianacabral/covidBR")
+```
+
+### Load covidBR
+
+To load `covidBR` package, use: 
+
+```{r eval = FALSE, include = TRUE}
+library(covidBR)
+```
+
+### Get URL download
+
+The original data comes from the Brazilian COVID-19 Portal (**Portal do COVID-19**), and can be found at <https://covid.saude.gov.br>. Annually, the Ministry of Health (Ministério da Saúde) updates and publicly disseminates the database, and, consequently, the download URL is updated.
+
+```{r eval = FALSE, include = TRUE}
+dowload_url <- covidBR::cbr_dowload_url()
+```
+
+### Import public file of the COVID-19 Portal
+
+Download the file from an existing download URL of [COVID-19 Portal](https://covid.saude.gov.br).
+
+```{r eval = FALSE, include = TRUE}
+covidBR::cbr_download(url_file = dowload_url)
+```
+
+### Unzip
+
+The file of [COVID-19 Portal](https://covid.saude.gov.br) can be compressed inside a `.zip`.
+
+```{r eval = FALSE, include = TRUE}
+covidBR::cbr_unzip(zip_file = file.choose())
+```
+
+### Bind multiple files
+
+```{r eval = FALSE, include = TRUE}
+covidBR::cbr_data()
+```
+
+### Available database 
+
+You can acess `covidBR` database with:
+
+```{r eval = FALSE, include = TRUE}
+covidBR::covidBR
+```
+
+**DESCRIPTION**
+
+The `covidBR` database contains 17 variables.
+
+|Variable|Description|
+|-----|-----|
+|**regiao**|Regions of Brazil|
+|**estado**|Federative units (UF) of Brazil|
+|**municipio**|Municipalities of Brazil|
+|**coduf**|UF code|
+|**codmun**|Brazilian municipality code|
+|**cod_regiao_saude**|Health region code|
+|**nome_regiao_saude**|Health region name|
+|**data**|Date|
+|**semana_epi**|Epidemiological week|
+|**populacao_tcu2019**|Population estimates sent to the TCU (2019)|
+|**casos_acumulado**|Total number of confirmed cases of COVID-19 that were registered by the Municipal and State Health Departments in the period considered.|
+|**casos_novos**|Number of new confirmed cases of COVID-19 that were registered by the Municipal and State Health Departments in relation to the previous day|
+|**obitos_acumulado**|Total number of deaths from COVID-19 that were registered by the Municipal and State Health Departments in the period considered.|
+|**obitos_novos**|Number of new deaths confirmed from COVID-19 that were registered by the Municipal and State Health Departments in relation to the previous day.|
+|**recuperadosnovos**|Number of new COVID-19 recoveries that were registered by the Municipal and State Health Departments in relation to the previous day.|
+|**em_acompanhamento_novos**|Number of new COVID-19 hospitalizations that were registered by the Municipal and State Health Departments in relation to the previous day.|
+|**interior_metropolitana**|Label for inland or metropolitan region.|

@@ -4,3 +4,4 @@
 ^\.rar$
 ^data-raw$
 ^\.github$
+^README\.Rmd$

@@ -1,6 +1,6 @@
 devtools::load_all(".")
 
-resp <- cbr_download(url_file = cbr_dowload_url(),
+resp <- cbr_download(url_file = cbr_download_url(),
                      dir = "./data-raw",
                      keep_filename = TRUE)
 

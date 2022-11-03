@@ -17,7 +17,7 @@
 #' @examples
 #'  \dontrun{cbr_dowload_url()}
 #'
-cbr_dowload_url <- function(){
+cbr_download_url <- function(){
 
   gov_url <- "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalGeral"
 
@@ -27,8 +27,8 @@ cbr_dowload_url <- function(){
   ) %>%
     httr::content()
 
-  dowload_url <- info_pg$results[[1]]$arquivo$url
+  download_url <- info_pg$results[[1]]$arquivo$url
 
-  return(dowload_url)
+  return(download_url)
 
 }

@@ -2,7 +2,7 @@
 
 export("%>%")
 export(cbr_data)
-export(cbr_dowload_url)
 export(cbr_download)
+export(cbr_download_url)
 export(cbr_unzip)
 importFrom(magrittr,"%>%")

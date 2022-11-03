@@ -1,0 +1,82 @@
+---
+title: "Introduction to covidBR dataset"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to covidBR dataset}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  out.width = "100%",
+  comment = "#>"
+)
+```
+
+The `covid` R package includes a dataset containing **COVID-19** epidemiological data from Brazil. In this introductory vignette, we will highlight some of the characteristics of this dataset that make it useful for reporting COVID-19 statistics in Brazil.
+
+## The covidBR package
+
+The original data comes from the Brazilian COVID-19 Portal (**Portal do COVID-19**), and can be found at <https://covid.saude.gov.br>. Daily, the Ministry of Health (**Ministerio da Saúde**) updates and publicly disseminates the database. In this context, the `covidBR` R package was built to extract data from the Brazilian COVID-19 Portal.  
+
+This package contains a dataset called `covidBR`.
+Furthermore, it provides raw data, downloaded from the COVID-19 Portal, in `CSV` format files (access [here](https://github.com/arianacabral/covidBR/tree/master/data-raw)). 
+
+### Installation 
+
+You can install the development version of `covidBR` from [GitHub](https://github.com/) with:
+
+```{r eval = FALSE, include = TRUE}
+# Development version
+# install.packages("devtools")
+devtools::install_github("arianacabral/covidBR")
+```
+
+### Load packages
+
+Now, let's load the `covidBR` and the libraries we will use in this vignette.
+
+```{r setup, warning=FALSE, message=FALSE, error=FALSE}
+# Load packages
+library(covidBR)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(ggplot2)
+library(rmarkdown)
+```
+
+## Meet the covidBR dataset
+
+The `covidBR::covidBR` dataset contains 17 variables for each Brazilian region, municipality, and state.
+
+> You can read more about the variables by typing `?covidBR::covidBR`.
+
+You can view what variables are available using the `str()` function.
+
+```{r error=FALSE,message=FALSE,warning=FALSE}
+# Display the dataset's structure
+str(covidBR)
+```
+
+You can also view the data in a tabular form.
+
+```{r}
+covidBR %>%
+  dplyr::filter(data >= max(data),
+                municipio== "") %>%
+  dplyr::select(!c(municipio, coduf,
+                   codmun, cod_regiao_saude,
+                   nome_regiao_saude,
+                   semana_epi,
+                   populacao_tcu2019,
+                   interior_metropolitana,
+                   em_acompanhamento_novos,
+                   recuperadosnovos)) %>%
+  dplyr::arrange(regiao, estado) %>%
+  rmarkdown::paged_table(options = list(rows.print = 49))
+```
+
+> Note that the raw data contains duplicate information!

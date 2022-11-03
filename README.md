@@ -16,7 +16,7 @@ and exported as `CSV` files.
 
 ### Installation
 
-You can install the development version of covidBR from
+You can install the development version of `covidBR` from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -41,7 +41,7 @@ disseminates the database, and, consequently, the download URL is
 updated.
 
 ``` r
-dowload_url <- covidBR::cbr_dowload_url()
+download_url <- covidBR::cbr_download_url()
 ```
 
 ### Import public file of the COVID-19 Portal
@@ -50,7 +50,7 @@ Download the file from an existing download URL of [COVID-19
 Portal](https://covid.saude.gov.br).
 
 ``` r
-covidBR::cbr_download(url_file = dowload_url)
+covidBR::cbr_download(url_file = download_url)
 ```
 
 ### Unzip
@@ -80,22 +80,22 @@ covidBR::covidBR
 
 The `covidBR` database contains 17 variables.
 
-| Variable                    | Description                                                                                                                                      |
-|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| **regiao**                  | Regions of Brazil                                                                                                                                |
-| **estado**                  | Federative units (UF) of Brazil                                                                                                                  |
-| **municipio**               | Municipalities of Brazil                                                                                                                         |
-| **coduf**                   | UF code                                                                                                                                          |
-| **codmun**                  | Brazilian municipality code                                                                                                                      |
-| **cod_regiao_saude**        | Health region code                                                                                                                               |
-| **nome_regiao_saude**       | Health region name                                                                                                                               |
-| **data**                    | Date                                                                                                                                             |
-| **semana_epi**              | Epidemiological week                                                                                                                             |
-| **populacao_tcu2019**       | Population estimates sent to the TCU (2019)                                                                                                      |
-| **casos_acumulado**         | Total number of confirmed cases of COVID-19 that were registered by the Municipal and State Health Departments in the period considered.         |
-| **casos_novos**             | Number of new confirmed cases of COVID-19 that were registered by the Municipal and State Health Departments in relation to the previous day     |
-| **obitos_acumulado**        | Total number of deaths from COVID-19 that were registered by the Municipal and State Health Departments in the period considered.                |
-| **obitos_novos**            | Number of new deaths confirmed from COVID-19 that were registered by the Municipal and State Health Departments in relation to the previous day. |
-| **recuperadosnovos**        | Number of new COVID-19 recoveries that were registered by the Municipal and State Health Departments in relation to the previous day.            |
-| **em_acompanhamento_novos** | Number of new COVID-19 hospitalizations that were registered by the Municipal and State Health Departments in relation to the previous day.      |
-| **interior_metropolitana**  | Label for inland or metropolitan region.                                                                                                         |
+| Variable                    | Description                                                                                                                                     |
+|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| **regiao**                  | Regions of Brazil                                                                                                                               |
+| **estado**                  | Federative units (UF) of Brazil                                                                                                                 |
+| **municipio**               | Municipalities of Brazil                                                                                                                        |
+| **coduf**                   | UF code                                                                                                                                         |
+| **codmun**                  | Brazilian municipality code                                                                                                                     |
+| **cod_regiao_saude**        | Health region code                                                                                                                              |
+| **nome_regiao_saude**       | Health region name                                                                                                                              |
+| **data**                    | Date                                                                                                                                            |
+| **semana_epi**              | Epidemiological week                                                                                                                            |
+| **populacao_tcu2019**       | Population estimates sent to the TCU (2019)                                                                                                     |
+| **casos_acumulado**         | Total number of confirmed cases of COVID-19 that were registered by the Municipal and State Health Departments in the period considered         |
+| **casos_novos**             | Number of new confirmed cases of COVID-19 that were registered by the Municipal and State Health Departments in relation to the previous day    |
+| **obitos_acumulado**        | Total number of deaths from COVID-19 that were registered by the Municipal and State Health Departments in the period considered                |
+| **obitos_novos**            | Number of new deaths confirmed from COVID-19 that were registered by the Municipal and State Health Departments in relation to the previous day |
+| **recuperadosnovos**        | Number of new COVID-19 recoveries that were registered by the Municipal and State Health Departments in relation to the previous day            |
+| **em_acompanhamento_novos** | Number of new COVID-19 hospitalizations that were registered by the Municipal and State Health Departments in relation to the previous day      |
+| **interior_metropolitana**  | Label for inland or metropolitan region                                                                                                         |

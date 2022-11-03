@@ -45,7 +45,7 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 library(ggplot2)
-library(rmarkdown)
+library(knitr)
 ```
 
 ## Meet the covidBR dataset
@@ -67,7 +67,7 @@ You can also view the data in a tabular form.
 covidBR %>%
   dplyr::filter(data >= max(data),
                 municipio== "") %>%
-  dplyr::select(!c(municipio, coduf,
+  dplyr::select(-c(municipio, coduf,
                    codmun, cod_regiao_saude,
                    nome_regiao_saude,
                    semana_epi,
@@ -75,8 +75,81 @@ covidBR %>%
                    interior_metropolitana,
                    em_acompanhamento_novos,
                    recuperadosnovos)) %>%
-  dplyr::arrange(regiao, estado) %>%
-  rmarkdown::paged_table(options = list(rows.print = 49))
+  dplyr::arrange(regiao, estado) %>% 
+  knitr::kable()
 ```
 
 > Note that the raw data contains duplicate information!
+
+### Tidy data for more efficient data science 
+
+In this case, it is necessary to organize data to help us work in an efficient, reproducible, and collaborative way. 
+
+The example below shows one way to organize the data and remove duplicate elements, but you can represent this same data in several ways.
+
+```{r error=FALSE,message=FALSE,warning=FALSE}
+# Get covidBR dataset
+tidycovidBR <- covidBR
+
+# Retain all rows with the most recent notification date for each Brazilian state.
+tidycovidBR <- tidycovidBR %>% 
+  dplyr::filter(data >= max(data),
+                municipio == "") %>%
+  dplyr::arrange(regiao, estado)  
+
+# Pivot the offending columns into a new pair of variables
+tidycovidBR <- tidycovidBR %>% tidyr::pivot_longer(
+  cols = c(populacao_tcu2019:interior_metropolitana,codmun),
+  names_to  = "variavel",
+  values_to = "valor")
+
+# Select the interesting columns
+tidycovidBR <- tidycovidBR %>% 
+  dplyr::select(-c(cod_regiao_saude,nome_regiao_saude))
+
+# Aggregate the duplicate columns
+tidycovidBR <- tidycovidBR %>% 
+  dplyr::group_by(variavel,data,regiao,estado,municipio,
+                  semana_epi, coduf) %>% 
+  dplyr::summarise_at(vars(valor),
+                      list(valor = sum), 
+                      na.rm = TRUE)
+# View the data in the original structure
+tidycovidBR %>% 
+  tidyr::pivot_wider(names_from = variavel, 
+                     values_from = valor) %>%
+  dplyr::ungroup() %>%  
+  dplyr::select(c(regiao,estado,data,
+                  casos_acumulado,casos_novos,
+                  obitos_acumulado, obitos_novos)) %>% 
+  dplyr::arrange(regiao, estado, data) %>% 
+  knitr::kable()
+
+```
+
+### Visualization
+
+You can now use [`ggplot2`](https://ggplot2.tidyverse.org/index.html) to explore the data and create visually appealing plots. See an example.
+
+```{r error=FALSE,message=FALSE,warning=FALSE}
+tidycovidBR  %>% 
+  dplyr::ungroup() %>% 
+  dplyr::filter(variavel != "codmun" &
+                  variavel != "interior_metropolitana" &
+                  variavel != "interior_metropolitana" & 
+                  variavel != "populacao_tcu2019" &
+                  variavel != "recuperadosnovos", 
+                regiao != "Brasil"
+  ) %>%  
+  dplyr::mutate_at("variavel", 
+                   stringr::str_replace_all,
+                   pattern = "_",
+                   replacement = " ")  %>% 
+  ggplot(aes(x = estado, y = valor, fill = estado)) + 
+  geom_bar(stat = "identity") +
+  facet_wrap(~ variavel, scales = "free_y", ncol = 1) + 
+  labs(x = "", y = "") + 
+  theme_minimal() + 
+  theme(legend.position = "none")
+```
+

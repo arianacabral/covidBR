@@ -12,7 +12,7 @@ the URL to download the public file.
 \description{
 The original data comes from the Brazilian
 COVID-19 Portal (Portal do COVID-19), and can be found at
-\url{https://covid.saude.gov.br}. Annually, the Ministry of Health
+\url{https://covid.saude.gov.br}. Daily, the Ministry of Health
 (Ministerio da Saude) updates and publicly disseminates the database, and,
 consequently, the download url is updated. This function scrape the link
 address of the web page and returns the URL download for the public file.

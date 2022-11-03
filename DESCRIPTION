@@ -24,13 +24,15 @@ Imports:
     data.table,
     dplyr,
     fs,
+    ggplot2,
     httr,
     janitor,
     magrittr,
     purrr,
     readr,
     stringi,
-    stringr
+    stringr,
+    tidyr
 Suggests: 
     rmarkdown,
     knitr,

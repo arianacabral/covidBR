@@ -65,8 +65,8 @@
 
 
 
-<link href="intro_covidBR_dataset_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="intro_covidBR_dataset_files/pagedtable-1.1/js/pagedtable.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Introduction to covidBR dataset</h1>
             
@@ -116,7 +116,7 @@ use in this vignette.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/rmarkdown" class="external-link">rmarkdown</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -157,7 +157,7 @@ each Brazilian region, municipality, and state.</p>
 <code class="sourceCode R"><span><span class="va">covidBR</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">data</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>,</span>
 <span>                <span class="va">municipio</span><span class="op">==</span> <span class="st">""</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">municipio</span>, <span class="va">coduf</span>,</span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">municipio</span>, <span class="va">coduf</span>,</span>
 <span>                   <span class="va">codmun</span>, <span class="va">cod_regiao_saude</span>,</span>
 <span>                   <span class="va">nome_regiao_saude</span>,</span>
 <span>                   <span class="va">semana_epi</span>,</span>
@@ -165,16 +165,822 @@ each Brazilian region, municipality, and state.</p>
 <span>                   <span class="va">interior_metropolitana</span>,</span>
 <span>                   <span class="va">em_acompanhamento_novos</span>,</span>
 <span>                   <span class="va">recuperadosnovos</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">regiao</span>, <span class="va">estado</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html" class="external-link">paged_table</a></span><span class="op">(</span>options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>rows.print <span class="op">=</span> <span class="fl">49</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["regiao"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estado"],"name":[2],"type":["chr"],"align":["left"]},{"label":["data"],"name":[3],"type":["IDate"],"align":["right"]},{"label":["casos_acumulado"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["casos_novos"],"name":[5],"type":["int"],"align":["right"]},{"label":["obitos_acumulado"],"name":[6],"type":["int"],"align":["right"]},{"label":["obitos_novos"],"name":[7],"type":["int"],"align":["right"]}],"data":[{"1":"Brasil","2":"","3":"2022-11-01","4":"34837035","5":"8286","6":"688219","7":"62"},{"1":"Centro-Oeste","2":"DF","3":"2022-11-01","4":"842972","5":"117","6":"11832","7":"0"},{"1":"Centro-Oeste","2":"GO","3":"2022-11-01","4":"1726577","5":"888","6":"27578","7":"-1"},{"1":"Centro-Oeste","2":"GO","3":"2022-11-01","4":"0","5":"0","6":"0","7":"0"},{"1":"Centro-Oeste","2":"MS","3":"2022-11-01","4":"582327","5":"21","6":"10845","7":"2"},{"1":"Centro-Oeste","2":"MT","3":"2022-11-01","4":"832432","5":"54","6":"14957","7":"0"},{"1":"Centro-Oeste","2":"MT","3":"2022-11-01","4":"0","5":"0","6":"0","7":"0"},{"1":"Nordeste","2":"AL","3":"2022-11-01","4":"321561","5":"3","6":"7128","7":"0"},{"1":"Nordeste","2":"AL","3":"2022-11-01","4":"0","5":"0","6":"0","7":"0"},{"1":"Nordeste","2":"BA","3":"2022-11-01","4":"1703991","5":"371","6":"30792","7":"1"},{"1":"Nordeste","2":"BA","3":"2022-11-01","4":"20860","5":"7","6":"356","7":"0"},{"1":"Nordeste","2":"CE","3":"2022-11-01","4":"1386482","5":"47","6":"28005","7":"9"},{"1":"Nordeste","2":"CE","3":"2022-11-01","4":"18155","5":"0","6":"163","7":"163"},{"1":"Nordeste","2":"MA","3":"2022-11-01","4":"474700","5":"4","6":"10996","7":"0"},{"1":"Nordeste","2":"MA","3":"2022-11-01","4":"0","5":"0","6":"0","7":"0"},{"1":"Nordeste","2":"PB","3":"2022-11-01","4":"654376","5":"6","6":"10406","7":"0"},{"1":"Nordeste","2":"PB","3":"2022-11-01","4":"0","5":"0","6":"0","7":"0"},{"1":"Nordeste","2":"PE","3":"2022-11-01","4":"1065225","5":"296","6":"22410","7":"4"},{"1":"Nordeste","2":"PE","3":"2022-11-01","4":"0","5":"0","6":"0","7":"0"},{"1":"Nordeste","2":"PI","3":"2022-11-01","4":"404893","5":"413","6":"7959","7":"0"},{"1":"Nordeste","2":"PI","3":"2022-11-01","4":"0","5":"0","6":"0","7":"0"},{"1":"Nordeste","2":"RN","3":"2022-11-01","4":"557553","5":"36","6":"8483","7":"0"},{"1":"Nordeste","2":"RN","3":"2022-11-01","4":"0","5":"0","6":"0","7":"0"},{"1":"Nordeste","2":"SE","3":"2022-11-01","4":"342914","5":"0","6":"6441","7":"0"},{"1":"Nordeste","2":"SE","3":"2022-11-01","4":"0","5":"0","6":"0","7":"0"},{"1":"Norte","2":"AC","3":"2022-11-01","4":"149871","5":"17","6":"2029","7":"0"},{"1":"Norte","2":"AM","3":"2022-11-01","4":"619286","5":"270","6":"14358","7":"0"},{"1":"Norte","2":"AP","3":"2022-11-01","4":"178427","5":"14","6":"2164","7":"0"},{"1":"Norte","2":"PA","3":"2022-11-01","4":"845141","5":"200","6":"18886","7":"0"},{"1":"Norte","2":"RO","3":"2022-11-01","4":"457668","5":"13","6":"7361","7":"0"},{"1":"Norte","2":"RO","3":"2022-11-01","4":"0","5":"0","6":"0","7":"0"},{"1":"Norte","2":"RR","3":"2022-11-01","4":"175526","5":"46","6":"2175","7":"0"},{"1":"Norte","2":"RR","3":"2022-11-01","4":"3980","5":"11","6":"23","7":"0"},{"1":"Norte","2":"TO","3":"2022-11-01","4":"344864","5":"0","6":"4206","7":"0"},{"1":"Norte","2":"TO","3":"2022-11-01","4":"0","5":"0","6":"0","7":"0"},{"1":"Sudeste","2":"ES","3":"2022-11-01","4":"1217371","5":"234","6":"14834","7":"4"},{"1":"Sudeste","2":"ES","3":"2022-11-01","4":"9281","5":"0","6":"281","7":"0"},{"1":"Sudeste","2":"MG","3":"2022-11-01","4":"3883495","5":"0","6":"63879","7":"0"},{"1":"Sudeste","2":"MG","3":"2022-11-01","4":"4266","5":"0","6":"427","7":"0"},{"1":"Sudeste","2":"RJ","3":"2022-11-01","4":"2537507","5":"1918","6":"75871","7":"13"},{"1":"Sudeste","2":"RJ","3":"2022-11-01","4":"0","5":"0","6":"0","7":"0"},{"1":"Sudeste","2":"SP","3":"2022-11-01","4":"6145825","5":"2276","6":"175574","7":"20"},{"1":"Sudeste","2":"SP","3":"2022-11-01","4":"218","5":"0","6":"0","7":"0"},{"1":"Sul","2":"PR","3":"2022-11-01","4":"2753618","5":"102","6":"45446","7":"6"},{"1":"Sul","2":"PR","3":"2022-11-01","4":"11787","5":"-1","6":"245","7":"0"},{"1":"Sul","2":"RS","3":"2022-11-01","4":"2747139","5":"449","6":"41195","7":"4"},{"1":"Sul","2":"RS","3":"2022-11-01","4":"0","5":"0","6":"0","7":"0"},{"1":"Sul","2":"SC","3":"2022-11-01","4":"1885294","5":"491","6":"22409","7":"0"},{"1":"Sul","2":"SC","3":"2022-11-01","4":"0","5":"0","6":"0","7":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[49],"max":[49]},"pages":{}}}
-  </script>
-</div>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">regiao</span>, <span class="va">estado</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="14%">
+<col width="7%">
+<col width="12%">
+<col width="17%">
+<col width="13%">
+<col width="19%">
+<col width="14%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">regiao</th>
+<th align="left">estado</th>
+<th align="left">data</th>
+<th align="right">casos_acumulado</th>
+<th align="right">casos_novos</th>
+<th align="right">obitos_acumulado</th>
+<th align="right">obitos_novos</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left"></td>
+<td align="left">2022-11-01</td>
+<td align="right">34837035</td>
+<td align="right">8286</td>
+<td align="right">688219</td>
+<td align="right">62</td>
+</tr>
+<tr class="even">
+<td align="left">Centro-Oeste</td>
+<td align="left">DF</td>
+<td align="left">2022-11-01</td>
+<td align="right">842972</td>
+<td align="right">117</td>
+<td align="right">11832</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Centro-Oeste</td>
+<td align="left">GO</td>
+<td align="left">2022-11-01</td>
+<td align="right">1726577</td>
+<td align="right">888</td>
+<td align="right">27578</td>
+<td align="right">-1</td>
+</tr>
+<tr class="even">
+<td align="left">Centro-Oeste</td>
+<td align="left">GO</td>
+<td align="left">2022-11-01</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Centro-Oeste</td>
+<td align="left">MS</td>
+<td align="left">2022-11-01</td>
+<td align="right">582327</td>
+<td align="right">21</td>
+<td align="right">10845</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">Centro-Oeste</td>
+<td align="left">MT</td>
+<td align="left">2022-11-01</td>
+<td align="right">832432</td>
+<td align="right">54</td>
+<td align="right">14957</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Centro-Oeste</td>
+<td align="left">MT</td>
+<td align="left">2022-11-01</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Nordeste</td>
+<td align="left">AL</td>
+<td align="left">2022-11-01</td>
+<td align="right">321561</td>
+<td align="right">3</td>
+<td align="right">7128</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Nordeste</td>
+<td align="left">AL</td>
+<td align="left">2022-11-01</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Nordeste</td>
+<td align="left">BA</td>
+<td align="left">2022-11-01</td>
+<td align="right">1703991</td>
+<td align="right">371</td>
+<td align="right">30792</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Nordeste</td>
+<td align="left">BA</td>
+<td align="left">2022-11-01</td>
+<td align="right">20860</td>
+<td align="right">7</td>
+<td align="right">356</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Nordeste</td>
+<td align="left">CE</td>
+<td align="left">2022-11-01</td>
+<td align="right">1386482</td>
+<td align="right">47</td>
+<td align="right">28005</td>
+<td align="right">9</td>
+</tr>
+<tr class="odd">
+<td align="left">Nordeste</td>
+<td align="left">CE</td>
+<td align="left">2022-11-01</td>
+<td align="right">18155</td>
+<td align="right">0</td>
+<td align="right">163</td>
+<td align="right">163</td>
+</tr>
+<tr class="even">
+<td align="left">Nordeste</td>
+<td align="left">MA</td>
+<td align="left">2022-11-01</td>
+<td align="right">474700</td>
+<td align="right">4</td>
+<td align="right">10996</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Nordeste</td>
+<td align="left">MA</td>
+<td align="left">2022-11-01</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Nordeste</td>
+<td align="left">PB</td>
+<td align="left">2022-11-01</td>
+<td align="right">654376</td>
+<td align="right">6</td>
+<td align="right">10406</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Nordeste</td>
+<td align="left">PB</td>
+<td align="left">2022-11-01</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Nordeste</td>
+<td align="left">PE</td>
+<td align="left">2022-11-01</td>
+<td align="right">1065225</td>
+<td align="right">296</td>
+<td align="right">22410</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">Nordeste</td>
+<td align="left">PE</td>
+<td align="left">2022-11-01</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Nordeste</td>
+<td align="left">PI</td>
+<td align="left">2022-11-01</td>
+<td align="right">404893</td>
+<td align="right">413</td>
+<td align="right">7959</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Nordeste</td>
+<td align="left">PI</td>
+<td align="left">2022-11-01</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Nordeste</td>
+<td align="left">RN</td>
+<td align="left">2022-11-01</td>
+<td align="right">557553</td>
+<td align="right">36</td>
+<td align="right">8483</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Nordeste</td>
+<td align="left">RN</td>
+<td align="left">2022-11-01</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Nordeste</td>
+<td align="left">SE</td>
+<td align="left">2022-11-01</td>
+<td align="right">342914</td>
+<td align="right">0</td>
+<td align="right">6441</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Nordeste</td>
+<td align="left">SE</td>
+<td align="left">2022-11-01</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Norte</td>
+<td align="left">AC</td>
+<td align="left">2022-11-01</td>
+<td align="right">149871</td>
+<td align="right">17</td>
+<td align="right">2029</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Norte</td>
+<td align="left">AM</td>
+<td align="left">2022-11-01</td>
+<td align="right">619286</td>
+<td align="right">270</td>
+<td align="right">14358</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Norte</td>
+<td align="left">AP</td>
+<td align="left">2022-11-01</td>
+<td align="right">178427</td>
+<td align="right">14</td>
+<td align="right">2164</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Norte</td>
+<td align="left">PA</td>
+<td align="left">2022-11-01</td>
+<td align="right">845141</td>
+<td align="right">200</td>
+<td align="right">18886</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Norte</td>
+<td align="left">RO</td>
+<td align="left">2022-11-01</td>
+<td align="right">457668</td>
+<td align="right">13</td>
+<td align="right">7361</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Norte</td>
+<td align="left">RO</td>
+<td align="left">2022-11-01</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Norte</td>
+<td align="left">RR</td>
+<td align="left">2022-11-01</td>
+<td align="right">175526</td>
+<td align="right">46</td>
+<td align="right">2175</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Norte</td>
+<td align="left">RR</td>
+<td align="left">2022-11-01</td>
+<td align="right">3980</td>
+<td align="right">11</td>
+<td align="right">23</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Norte</td>
+<td align="left">TO</td>
+<td align="left">2022-11-01</td>
+<td align="right">344864</td>
+<td align="right">0</td>
+<td align="right">4206</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Norte</td>
+<td align="left">TO</td>
+<td align="left">2022-11-01</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Sudeste</td>
+<td align="left">ES</td>
+<td align="left">2022-11-01</td>
+<td align="right">1217371</td>
+<td align="right">234</td>
+<td align="right">14834</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">Sudeste</td>
+<td align="left">ES</td>
+<td align="left">2022-11-01</td>
+<td align="right">9281</td>
+<td align="right">0</td>
+<td align="right">281</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Sudeste</td>
+<td align="left">MG</td>
+<td align="left">2022-11-01</td>
+<td align="right">3883495</td>
+<td align="right">0</td>
+<td align="right">63879</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Sudeste</td>
+<td align="left">MG</td>
+<td align="left">2022-11-01</td>
+<td align="right">4266</td>
+<td align="right">0</td>
+<td align="right">427</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Sudeste</td>
+<td align="left">RJ</td>
+<td align="left">2022-11-01</td>
+<td align="right">2537507</td>
+<td align="right">1918</td>
+<td align="right">75871</td>
+<td align="right">13</td>
+</tr>
+<tr class="odd">
+<td align="left">Sudeste</td>
+<td align="left">RJ</td>
+<td align="left">2022-11-01</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Sudeste</td>
+<td align="left">SP</td>
+<td align="left">2022-11-01</td>
+<td align="right">6145825</td>
+<td align="right">2276</td>
+<td align="right">175574</td>
+<td align="right">20</td>
+</tr>
+<tr class="odd">
+<td align="left">Sudeste</td>
+<td align="left">SP</td>
+<td align="left">2022-11-01</td>
+<td align="right">218</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Sul</td>
+<td align="left">PR</td>
+<td align="left">2022-11-01</td>
+<td align="right">2753618</td>
+<td align="right">102</td>
+<td align="right">45446</td>
+<td align="right">6</td>
+</tr>
+<tr class="odd">
+<td align="left">Sul</td>
+<td align="left">PR</td>
+<td align="left">2022-11-01</td>
+<td align="right">11787</td>
+<td align="right">-1</td>
+<td align="right">245</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Sul</td>
+<td align="left">RS</td>
+<td align="left">2022-11-01</td>
+<td align="right">2747139</td>
+<td align="right">449</td>
+<td align="right">41195</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">Sul</td>
+<td align="left">RS</td>
+<td align="left">2022-11-01</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Sul</td>
+<td align="left">SC</td>
+<td align="left">2022-11-01</td>
+<td align="right">1885294</td>
+<td align="right">491</td>
+<td align="right">22409</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Sul</td>
+<td align="left">SC</td>
+<td align="left">2022-11-01</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
 <p>Note that the raw data contains duplicate information!</p>
 </blockquote>
+<div class="section level3">
+<h3 id="tidy-data-for-more-efficient-data-science">Tidy data for more efficient data science<a class="anchor" aria-label="anchor" href="#tidy-data-for-more-efficient-data-science"></a>
+</h3>
+<p>In this case, it is necessary to organize data to help us work in an
+efficient, reproducible, and collaborative way.</p>
+<p>The example below shows one way to organize the data and remove
+duplicate elements, but you can represent this same data in several
+ways.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get covidBR dataset</span></span>
+<span><span class="va">tidycovidBR</span> <span class="op">&lt;-</span> <span class="va">covidBR</span></span>
+<span></span>
+<span><span class="co"># Retain all rows with the most recent notification date for each Brazilian state.</span></span>
+<span><span class="va">tidycovidBR</span> <span class="op">&lt;-</span> <span class="va">tidycovidBR</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">data</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>,</span>
+<span>                <span class="va">municipio</span> <span class="op">==</span> <span class="st">""</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">regiao</span>, <span class="va">estado</span><span class="op">)</span>  </span>
+<span></span>
+<span><span class="co"># Pivot the offending columns into a new pair of variables</span></span>
+<span><span class="va">tidycovidBR</span> <span class="op">&lt;-</span> <span class="va">tidycovidBR</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span></span>
+<span>  cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">populacao_tcu2019</span><span class="op">:</span><span class="va">interior_metropolitana</span>,<span class="va">codmun</span><span class="op">)</span>,</span>
+<span>  names_to  <span class="op">=</span> <span class="st">"variavel"</span>,</span>
+<span>  values_to <span class="op">=</span> <span class="st">"valor"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Select the interesting columns</span></span>
+<span><span class="va">tidycovidBR</span> <span class="op">&lt;-</span> <span class="va">tidycovidBR</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">cod_regiao_saude</span>,<span class="va">nome_regiao_saude</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Aggregate the duplicate columns</span></span>
+<span><span class="va">tidycovidBR</span> <span class="op">&lt;-</span> <span class="va">tidycovidBR</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">variavel</span>,<span class="va">data</span>,<span class="va">regiao</span>,<span class="va">estado</span>,<span class="va">municipio</span>,</span>
+<span>                  <span class="va">semana_epi</span>, <span class="va">coduf</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html" class="external-link">summarise_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">valor</span><span class="op">)</span>,</span>
+<span>                      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>valor <span class="op">=</span> <span class="va">sum</span><span class="op">)</span>, </span>
+<span>                      na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># View the data in the original structure</span></span>
+<span><span class="va">tidycovidBR</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">variavel</span>, </span>
+<span>                     values_from <span class="op">=</span> <span class="va">valor</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>  </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">regiao</span>,<span class="va">estado</span>,<span class="va">data</span>,</span>
+<span>                  <span class="va">casos_acumulado</span>,<span class="va">casos_novos</span>,</span>
+<span>                  <span class="va">obitos_acumulado</span>, <span class="va">obitos_novos</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">regiao</span>, <span class="va">estado</span>, <span class="va">data</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="14%">
+<col width="7%">
+<col width="12%">
+<col width="17%">
+<col width="13%">
+<col width="19%">
+<col width="14%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">regiao</th>
+<th align="left">estado</th>
+<th align="left">data</th>
+<th align="right">casos_acumulado</th>
+<th align="right">casos_novos</th>
+<th align="right">obitos_acumulado</th>
+<th align="right">obitos_novos</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left"></td>
+<td align="left">2022-11-01</td>
+<td align="right">34837035</td>
+<td align="right">8286</td>
+<td align="right">688219</td>
+<td align="right">62</td>
+</tr>
+<tr class="even">
+<td align="left">Centro-Oeste</td>
+<td align="left">DF</td>
+<td align="left">2022-11-01</td>
+<td align="right">842972</td>
+<td align="right">117</td>
+<td align="right">11832</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Centro-Oeste</td>
+<td align="left">GO</td>
+<td align="left">2022-11-01</td>
+<td align="right">1726577</td>
+<td align="right">888</td>
+<td align="right">27578</td>
+<td align="right">-1</td>
+</tr>
+<tr class="even">
+<td align="left">Centro-Oeste</td>
+<td align="left">MS</td>
+<td align="left">2022-11-01</td>
+<td align="right">582327</td>
+<td align="right">21</td>
+<td align="right">10845</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">Centro-Oeste</td>
+<td align="left">MT</td>
+<td align="left">2022-11-01</td>
+<td align="right">832432</td>
+<td align="right">54</td>
+<td align="right">14957</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Nordeste</td>
+<td align="left">AL</td>
+<td align="left">2022-11-01</td>
+<td align="right">321561</td>
+<td align="right">3</td>
+<td align="right">7128</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Nordeste</td>
+<td align="left">BA</td>
+<td align="left">2022-11-01</td>
+<td align="right">1724851</td>
+<td align="right">378</td>
+<td align="right">31148</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Nordeste</td>
+<td align="left">CE</td>
+<td align="left">2022-11-01</td>
+<td align="right">1404637</td>
+<td align="right">47</td>
+<td align="right">28168</td>
+<td align="right">172</td>
+</tr>
+<tr class="odd">
+<td align="left">Nordeste</td>
+<td align="left">MA</td>
+<td align="left">2022-11-01</td>
+<td align="right">474700</td>
+<td align="right">4</td>
+<td align="right">10996</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Nordeste</td>
+<td align="left">PB</td>
+<td align="left">2022-11-01</td>
+<td align="right">654376</td>
+<td align="right">6</td>
+<td align="right">10406</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Nordeste</td>
+<td align="left">PE</td>
+<td align="left">2022-11-01</td>
+<td align="right">1065225</td>
+<td align="right">296</td>
+<td align="right">22410</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">Nordeste</td>
+<td align="left">PI</td>
+<td align="left">2022-11-01</td>
+<td align="right">404893</td>
+<td align="right">413</td>
+<td align="right">7959</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Nordeste</td>
+<td align="left">RN</td>
+<td align="left">2022-11-01</td>
+<td align="right">557553</td>
+<td align="right">36</td>
+<td align="right">8483</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Nordeste</td>
+<td align="left">SE</td>
+<td align="left">2022-11-01</td>
+<td align="right">342914</td>
+<td align="right">0</td>
+<td align="right">6441</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Norte</td>
+<td align="left">AC</td>
+<td align="left">2022-11-01</td>
+<td align="right">149871</td>
+<td align="right">17</td>
+<td align="right">2029</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Norte</td>
+<td align="left">AM</td>
+<td align="left">2022-11-01</td>
+<td align="right">619286</td>
+<td align="right">270</td>
+<td align="right">14358</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Norte</td>
+<td align="left">AP</td>
+<td align="left">2022-11-01</td>
+<td align="right">178427</td>
+<td align="right">14</td>
+<td align="right">2164</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Norte</td>
+<td align="left">PA</td>
+<td align="left">2022-11-01</td>
+<td align="right">845141</td>
+<td align="right">200</td>
+<td align="right">18886</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Norte</td>
+<td align="left">RO</td>
+<td align="left">2022-11-01</td>
+<td align="right">457668</td>
+<td align="right">13</td>
+<td align="right">7361</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Norte</td>
+<td align="left">RR</td>
+<td align="left">2022-11-01</td>
+<td align="right">179506</td>
+<td align="right">57</td>
+<td align="right">2198</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Norte</td>
+<td align="left">TO</td>
+<td align="left">2022-11-01</td>
+<td align="right">344864</td>
+<td align="right">0</td>
+<td align="right">4206</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Sudeste</td>
+<td align="left">ES</td>
+<td align="left">2022-11-01</td>
+<td align="right">1226652</td>
+<td align="right">234</td>
+<td align="right">15115</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">Sudeste</td>
+<td align="left">MG</td>
+<td align="left">2022-11-01</td>
+<td align="right">3887761</td>
+<td align="right">0</td>
+<td align="right">64306</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Sudeste</td>
+<td align="left">RJ</td>
+<td align="left">2022-11-01</td>
+<td align="right">2537507</td>
+<td align="right">1918</td>
+<td align="right">75871</td>
+<td align="right">13</td>
+</tr>
+<tr class="odd">
+<td align="left">Sudeste</td>
+<td align="left">SP</td>
+<td align="left">2022-11-01</td>
+<td align="right">6146043</td>
+<td align="right">2276</td>
+<td align="right">175574</td>
+<td align="right">20</td>
+</tr>
+<tr class="even">
+<td align="left">Sul</td>
+<td align="left">PR</td>
+<td align="left">2022-11-01</td>
+<td align="right">2765405</td>
+<td align="right">101</td>
+<td align="right">45691</td>
+<td align="right">6</td>
+</tr>
+<tr class="odd">
+<td align="left">Sul</td>
+<td align="left">RS</td>
+<td align="left">2022-11-01</td>
+<td align="right">2747139</td>
+<td align="right">449</td>
+<td align="right">41195</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">Sul</td>
+<td align="left">SC</td>
+<td align="left">2022-11-01</td>
+<td align="right">1885294</td>
+<td align="right">491</td>
+<td align="right">22409</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
+<h3 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
+</h3>
+<p>You can now use <a href="https://ggplot2.tidyverse.org/index.html" class="external-link"><code>ggplot2</code></a>
+to explore the data and create visually appealing plots. See an
+example.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tidycovidBR</span>  <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">variavel</span> <span class="op">!=</span> <span class="st">"codmun"</span> <span class="op">&amp;</span></span>
+<span>                  <span class="va">variavel</span> <span class="op">!=</span> <span class="st">"interior_metropolitana"</span> <span class="op">&amp;</span></span>
+<span>                  <span class="va">variavel</span> <span class="op">!=</span> <span class="st">"interior_metropolitana"</span> <span class="op">&amp;</span> </span>
+<span>                  <span class="va">variavel</span> <span class="op">!=</span> <span class="st">"populacao_tcu2019"</span> <span class="op">&amp;</span></span>
+<span>                  <span class="va">variavel</span> <span class="op">!=</span> <span class="st">"recuperadosnovos"</span>, </span>
+<span>                <span class="va">regiao</span> <span class="op">!=</span> <span class="st">"Brasil"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>  </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html" class="external-link">mutate_at</a></span><span class="op">(</span><span class="st">"variavel"</span>, </span>
+<span>                   <span class="fu">stringr</span><span class="fu">::</span><span class="va"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span>,</span>
+<span>                   pattern <span class="op">=</span> <span class="st">"_"</span>,</span>
+<span>                   replacement <span class="op">=</span> <span class="st">" "</span><span class="op">)</span>  <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">estado</span>, y <span class="op">=</span> <span class="va">valor</span>, fill <span class="op">=</span> <span class="va">estado</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">variavel</span>, scales <span class="op">=</span> <span class="st">"free_y"</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="intro_covidBR_dataset_files/figure-html/unnamed-chunk-6-1.png" width="100%"></p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

@@ -8,7 +8,7 @@ cbr_unzip(zip_file, dir = ".", keep_zip_file = TRUE)
 }
 \arguments{
 \item{zip_file}{a \code{character} string, corresponding the archive filename, or
-an \link{archive} object}
+an \link{archive} object.}
 
 \item{dir}{a \code{character} string, corresponding the directory to extract
 archive contents. By default, the current directory is used.

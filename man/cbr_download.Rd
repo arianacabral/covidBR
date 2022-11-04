@@ -25,11 +25,11 @@ should be downloaded. By default, the current directory is used
 extension) saved
 on the local disc. By default, \strong{covidBR} was used as filename.}
 
-\item{keep_filename}{logical. If \link{TRUE}, the name of public
+\item{keep_filename}{\code{logical}. If \link{TRUE}, the name of public
 file will be used and parameter \code{filename} is ignored (\code{default = FALSE}).}
 
 \item{overwrite}{\code{logical}. If \link{TRUE}, the default, the local file with the
-#' same name will be overwritten.}
+same name will be overwritten.}
 
 \item{show_progress}{\code{logical}. If \link{TRUE}, the default, shows a progress bar
 for uploading.}
@@ -40,19 +40,19 @@ Download a public file from an existing download URL.
 \examples{
 \dontrun{
 # Get dowload url (COVID-19 Portal)
-dowload_url <- cbr_dowload_url()
+download_url <- cbr_dowload_url()
 
-# Save file with default name ("data")
-cbr_download(url_file = dowload_url)
+# Save file with default name ('data')
+cbr_download(url_file = download_url)
 
-# Save file with name "my_data"
-cbr_download(url_file = dowload_url, filename = "mydata")
+# Save file with name 'my_data'
+cbr_download(url_file = download_url, filename = "mydata")
 
 # Save file with default name of COVID-19 Portal
-cbr_download(url_file = dowload_url, keep_filename = TRUE)
+cbr_download(url_file = download_url, keep_filename = TRUE)
 
 # Save file in 'myfolder' folder
-cbr_download(url_file = dowload_url, dir = "./myfolder")
+cbr_download(url_file = download_url, dir = "./myfolder")
 
 }
 }

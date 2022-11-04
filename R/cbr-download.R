@@ -10,10 +10,10 @@
 #' @param filename a `character` string, corresponding the filename (without the
 #' extension) saved
 #' on the local disc. By default, **covidBR** was used as filename.
-#' @param keep_filename logical. If [TRUE], the name of public
+#' @param keep_filename `logical`. If [TRUE], the name of public
 #' file will be used and parameter `filename` is ignored (`default = FALSE`).
 #' @param overwrite `logical`. If [TRUE], the default, the local file with the
-#' #' same name will be overwritten.
+#'  same name will be overwritten.
 #' @param show_progress `logical`. If [TRUE], the default, shows a progress bar
 #' for uploading.
 #'
@@ -22,19 +22,19 @@
 #' @examples
 #' \dontrun{
 #' # Get dowload url (COVID-19 Portal)
-#' dowload_url <- cbr_dowload_url()
+#' download_url <- cbr_dowload_url()
 #'
-#' # Save file with default name ("data")
-#' cbr_download(url_file = dowload_url)
+#' # Save file with default name ('data')
+#' cbr_download(url_file = download_url)
 #'
-#' # Save file with name "my_data"
-#' cbr_download(url_file = dowload_url, filename = "mydata")
+#' # Save file with name 'my_data'
+#' cbr_download(url_file = download_url, filename = "mydata")
 #'
 #' # Save file with default name of COVID-19 Portal
-#' cbr_download(url_file = dowload_url, keep_filename = TRUE)
+#' cbr_download(url_file = download_url, keep_filename = TRUE)
 #'
 #' # Save file in 'myfolder' folder
-#' cbr_download(url_file = dowload_url, dir = "./myfolder")
+#' cbr_download(url_file = download_url, dir = "./myfolder")
 #'
 #' }
 cbr_download <- function(url_file = NULL,

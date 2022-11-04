@@ -2,7 +2,7 @@
 #'
 #' @description Extract contents of an archive to a directory.
 #' @param zip_file a `character` string, corresponding the archive filename, or
-#' an [archive] object
+#' an [archive] object.
 #' @param dir a `character` string, corresponding the directory to extract
 #' archive contents. By default, the current directory is used.
 #' (see [getwd()]).

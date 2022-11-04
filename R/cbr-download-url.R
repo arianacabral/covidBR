@@ -4,7 +4,7 @@
 #' COVID-19 Portal (Portal do COVID-19), and can be found at
 #' <https://covid.saude.gov.br>. Daily, the Ministry of Health
 #' (Ministerio da Saude) updates and publicly disseminates the database, and,
-#' consequently, the download url is updated. This function scrape the link
+#' consequently, the download URL is updated. This function scrape the link
 #' address of the web page and returns the URL download for the public file.
 #'
 #' @return the URL to download the public file.
@@ -15,7 +15,7 @@
 #'   [httr::GET()], [httr::content()]
 #'
 #' @examples
-#'  \dontrun{cbr_dowload_url()}
+#'  \dontrun{cbr_download_url()}
 #'
 cbr_download_url <- function(){
 

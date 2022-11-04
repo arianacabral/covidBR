@@ -98,9 +98,9 @@ You can also view the data in a tabular form.
 
 ```{r eval=FALSE, include=TRUE}
 covidBR.db %>% 
-  dplyr::filter(data >= (Sys.Date()-2),
-                municipio== "") %>% 
-  dplyr::select(!c(municipio, coduf, 
+  dplyr::filter(data >= (Sys.Date()-2), # last 2 days
+                municipio== "") %>% # only Brazilian states
+  dplyr::select(-c(municipio, coduf, 
                    codmun, cod_regiao_saude,
                    nome_regiao_saude,
                    semana_epi,
@@ -109,5 +109,5 @@ covidBR.db %>%
                    em_acompanhamento_novos, 
                    recuperadosnovos)) %>% 
   knitr:: kable(digits = 4,
-                caption = "Brasil (últimos 2 dias)")
+                caption = "Brazil (last 2 days)")
 ```

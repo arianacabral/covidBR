@@ -88,7 +88,7 @@ Brazil.</p>
 </h2>
 <p>The original data comes from the Brazilian COVID-19 Portal
 (<strong>Portal do COVID-19</strong>), and can be found at <a href="https://covid.saude.gov.br" class="external-link uri">https://covid.saude.gov.br</a>. Daily, the Ministry of
-Health (<strong>Ministerio da Saúde</strong>) updates and publicly
+Health (<strong>Ministério da Saúde</strong>) updates and publicly
 disseminates the database. In this context, the <code>covidBR</code> R
 package was built to extract data from the Brazilian COVID-19
 Portal.</p>
@@ -669,6 +669,7 @@ ways.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html" class="external-link">summarise_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">valor</span><span class="op">)</span>,</span>
 <span>                      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>valor <span class="op">=</span> <span class="va">sum</span><span class="op">)</span>, </span>
 <span>                      na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># View the data in the original structure</span></span>
 <span><span class="va">tidycovidBR</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">variavel</span>, </span>
@@ -955,7 +956,7 @@ ways.</p>
 </table>
 </div>
 <div class="section level3">
-<h3 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
+<h3 id="plot-data">Plot data<a class="anchor" aria-label="anchor" href="#plot-data"></a>
 </h3>
 <p>You can now use <a href="https://ggplot2.tidyverse.org/index.html" class="external-link"><code>ggplot2</code></a>
 to explore the data and create visually appealing plots. See an

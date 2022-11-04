@@ -35,7 +35,7 @@ library(covidBR)
 ### Get URL download
 
 The original data comes from the Brazilian COVID-19 Portal (**Portal do
-COVID-19**), and can be found at <https://covid.saude.gov.br>. Annually,
+COVID-19**), and can be found at <https://covid.saude.gov.br>. Daily,
 the Ministry of Health (Ministério da Saúde) updates and publicly
 disseminates the database, and, consequently, the download URL is
 updated.
@@ -89,7 +89,7 @@ The `covidBR` database contains 17 variables.
 | **codmun**                  | Brazilian municipality code                                                                                                                     |
 | **cod_regiao_saude**        | Health region code                                                                                                                              |
 | **nome_regiao_saude**       | Health region name                                                                                                                              |
-| **data**                    | Date                                                                                                                                            |
+| **data**                    | Notification date                                                                                                                               |
 | **semana_epi**              | Epidemiological week                                                                                                                            |
 | **populacao_tcu2019**       | Population estimates sent to the TCU (2019)                                                                                                     |
 | **casos_acumulado**         | Total number of confirmed cases of COVID-19 that were registered by the Municipal and State Health Departments in the period considered         |

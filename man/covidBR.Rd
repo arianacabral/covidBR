@@ -14,27 +14,27 @@ A data table with 17 variables and multiple rows:
 \item{codmun}{Brazilian municipality code}
 \item{cod_regiao_saude}{Health region code}
 \item{nome_regiao_saude}{Health region name}
-\item{data}{Date}
+\item{data}{Notification date}
 \item{semana_epi}{Epidemiological week}
 \item{populacao_tcu2019}{Population estimates sent to the TCU (2019)}
 \item{casos_acumulado}{Total number of confirmed cases of COVID-19 that
 were registered by the Municipal and State Health Departments in
-the period considered.}
+the period considered}
 \item{casos_novos}{Number of new confirmed cases of COVID-19 that were
 registered by the Municipal and State Health Departments in relation to
 the previous day}
 \item{obitos_acumulado}{Total number of deaths from COVID-19 that
 were registered by the Municipal and State Health Departments in
-the period considered.}
+the period considered}
 \item{obitos_novos}{Number of new deaths confirmed from COVID-19 that were
 registered by the Municipal and State Health Departments in relation to
-the previous day.}
+the previous day}
 \item{recuperadosnovos}{Number of new COVID-19 recoveries that were
 registered by the Municipal and State Health Departments in relation to
-the previous day.}
+the previous day}
 \item{em_acompanhamento_novos}{Number of new COVID-19 hospitalizations
 that were registered by the Municipal and State Health Departments in
-relation to the previous day.}
+relation to the previous day}
 \item{interior_metropolitana}{Label for inland or metropolitan region}
 }
 }

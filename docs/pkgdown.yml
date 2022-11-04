@@ -2,7 +2,8 @@ pandoc: '2.18'
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
+  art: art.html
   intro_covidBR: intro_covidBR.html
   intro_covidBR_dataset: intro_covidBR_dataset.html
-last_built: 2022-11-04T16:14Z
+last_built: 2022-11-04T23:08Z
 

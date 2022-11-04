@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# covidBR
+# covidBR <img src="man/figures/hex-sticker_covidBR.png" align="right" width = "120px"/>
 
 <!-- badges: start -->
 

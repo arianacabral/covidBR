@@ -23,19 +23,18 @@ Imports:
     archive,
     data.table,
     dplyr,
-    fs,
-    ggplot2,
     httr,
     janitor,
     magrittr,
     purrr,
-    readr,
     stringi,
-    stringr,
-    tidyr
+    stringr
 Suggests: 
     rmarkdown,
+    fs,
+    ggplot2,
     knitr,
+    tidyr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Depends: 

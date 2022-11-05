@@ -23,6 +23,7 @@ Imports:
     archive,
     data.table,
     dplyr,
+    fs,
     httr,
     janitor,
     magrittr,
@@ -31,7 +32,6 @@ Imports:
     stringr
 Suggests: 
     rmarkdown,
-    fs,
     ggplot2,
     here,
     knitr,

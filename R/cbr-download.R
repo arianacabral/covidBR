@@ -73,13 +73,7 @@ cbr_download <- function(url_file = NULL,
 
   }else{
 
-    filename <- stringr::str_c(
-      stringr::str_replace(url_file,
-                           pattern = ".+/(.+)\\.\\w+$",
-                           replacement = "\\1"),
-      tools::file_ext(url_file),
-      sep = "."
-    )
+    filename <- fs::path_file(url_file)
   }
 
 

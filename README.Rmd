@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 # covidBR <img src="man/figures/hex-sticker_covidBR.png" align="right" width = "120px"/>
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/arianacabral/covidBR/workflows/R-CMD-check/badge.svg)](https://github.com/arianacabral/covidBR/actions)
+[![R-CMD-check](https://github.com/arianacabral/covidBR/workflows/R-CMD-check/badge.svg)](https://github.com/arianacabral/covidBR/actions) [![DOI](https://zenodo.org/badge/561033989.svg)](https://zenodo.org/badge/latestdoi/561033989)
 <!-- badges: end -->
 
 The `covidBR` R package, written by [Ariana Moura Cabral](https://orcid.org/0000-0002-9804-353X) and [Adriano de Oliveira Andrade](https://orcid.org/0000-0002-5689-6606), was built to extract data from the Brazilian [COVID-19 Portal](https://covid.saude.gov.br) and exported as `CSV` files.

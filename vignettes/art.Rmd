@@ -19,7 +19,7 @@ The COVID-19 pandemic was and continues to be an unprecedented historic event. H
 
 **A picture is worth a thousand words!**
 
-You are encouraged to use the accompanying artwork when using or teaching covidBR! Please remember to credit if you repost ("Artwork by [Ariana Moura Cabral](https://orcid.org/0000-0002-9804-353X)").
+You are encouraged to use the accompanying artwork when using or teaching `covidBR`! Please remember to credit if you repost ("Artwork by [Ariana Moura Cabral](https://orcid.org/0000-0002-9804-353X)").
 
 ## Meet the covidBR history
 

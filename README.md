@@ -6,6 +6,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/arianacabral/covidBR/workflows/R-CMD-check/badge.svg)](https://github.com/arianacabral/covidBR/actions)
+[![DOI](https://zenodo.org/badge/561033989.svg)](https://zenodo.org/badge/latestdoi/561033989)
 <!-- badges: end -->
 
 The `covidBR` R package, written by [Ariana Moura

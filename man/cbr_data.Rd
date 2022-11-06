@@ -4,7 +4,7 @@
 \alias{cbr_data}
 \title{Read and bind multiple files of COVID-19 Portal}
 \usage{
-cbr_data(dir = ".", filepath = ".", save2disk = FALSE)
+cbr_data(dir = ".", filepath = ".", save2disk = FALSE, date = NULL)
 }
 \arguments{
 \item{dir}{a \code{character} string, corresponding the directory containing the
@@ -16,6 +16,11 @@ be save. By default, the current directory is used
 
 \item{save2disk}{\code{logical}. If \link{TRUE}, the database is saved in a file in
 csv format.}
+
+\item{date}{a date string, in year-month-day format (e.g.:`"2022-11-06").
+\itemize{
+\item Data from "2022-10-06" to "2022-10-07": date = c("2022-10-06","2022-10-07")
+}}
 }
 \value{
 a \code{data.table} object with 17 columns, corresponding the database.

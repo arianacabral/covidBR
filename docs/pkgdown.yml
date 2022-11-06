@@ -3,6 +3,7 @@ pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   art: art.html
+  intro_covidBR: intro_covidBR.html
   intro_covidBR_dataset: intro_covidBR_dataset.html
-last_built: 2022-11-06T21:09Z
+last_built: 2022-11-06T23:49Z
 

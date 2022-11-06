@@ -1,0 +1,234 @@
+---
+title: "Introduction to covidBR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to covidBR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  out.width = "100%",
+  comment = "#>"
+)
+```
+
+The `covidBR` package provides easy access to official COVID-19 data sets of Brazil. All functions' syntax is based on a simple logic that allows users to download updated data sets for all years. This vignette provides an overview of `covidBR`.
+
+### Installation 
+
+You can install the development version of `covidBR` from [GitHub](https://github.com/) with:
+
+```{r eval = FALSE, include = TRUE}
+# Development version
+# install.packages("devtools")
+devtools::install_github("arianacabral/covidBR")
+```
+
+
+### Load packages
+
+Now, let's load the `covidBR` and the libraries we’ll use in this vignette.
+
+```{r setup, warning=FALSE, message=FALSE, error=FALSE}
+# Load packages
+library(covidBR)
+library(fs)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(lubridate)
+library(ggplot2)
+library(knitr)
+```
+
+### General usage
+
+The `covidBR` allows you to obtain the *URL* on the [Covid-19 Portal](covid.saude.gov.br) available for downloading the files. 
+
+> Daily, the Ministry of Health (**Ministério da Saúde**) updates and publicly disseminates the database, and, consequently, the *download URL* is updated.
+
+```{r, error = FALSE, message = FALSE, warning = FALSE}
+# Get updated URL to download the public file
+download_url <- covidBR::cbr_download_url()
+
+# Print URL
+download_url
+```
+
+Now let's download the public file available at the obtained URL.
+
+```{r eval=FALSE, include=TRUE}
+# Download public file
+resp <- covidBR::cbr_download(url_file = download_url,
+                              dir = here::here("inst/extdata"), #saving to "extradata" folder
+                              keep_filename = TRUE)
+
+# Get filename
+filename <- fs::path_file(resp$url)
+
+# Print filename
+filename
+
+```
+
+A `zip` file has been downloaded from the [COVID-19 Portal](https://covid.saude.gov.br/). We use the `cbr_unzip()` function to unzip it.
+
+```{r eval=FALSE, include=TRUE}
+# Set absolute directory
+abs_path <- stringr::str_c(
+  here::here("inst/extdata"),
+  filename,
+  sep = "/"
+)
+
+# Unzip
+covidBR::cbr_unzip(zip_file = abs_path,
+                   dir = here::here("inst/extdata"), # the directory to extract archive contents
+                   keep_zip_file = FALSE) # Delete the compressed file
+```
+
+Simply use the `cbr_data()` function to combine all files and generate a single dataset.
+
+> You can already combine the files by specifying a time range of interest. 
+For example, use the argument `date = Sys.Date()` to retrieve today's data.
+
+```{r message=FALSE, error=FALSE, warning=FALSE}
+# Bind multiple files
+covidBR.db <- covidBR::cbr_data(dir = here::here("inst/extdata"))  
+```
+
+### Available variables
+
+You can view what variables are available using the `str()` function.
+
+```{r message=FALSE, error=FALSE, warning=FALSE}
+# Display the dataset's structure
+str(covidBR.db)
+```
+
+### Data exploration
+
+You may be interested in specific information, and we will now demonstrate how to work with some case scenarios.
+
+#### Data exploration by date
+
+For this purpose, we can use the package `lubridate`. It is an R package that makes it easier to work with dates and times.
+
+> See `help(package = "lubridate")`.
+
+How can I get this year's data?
+
+```{r eval=FALSE, include=FALSE}
+# Get current date
+today <- Sys.Date()
+
+# Print current date
+today
+
+# Get this year
+current_year <- lubridate::year(today)
+
+# Print the current year 
+current_year
+
+# Set first day of this year
+day_1 <- lubridate::ymd(paste0(current_year,"01","01",sep="-"))
+
+# Print the first day of this year 
+day_1
+
+# Get this year's data
+covidBR.db <- covidBR::cbr_data(dir = here::here("data-raw"),
+                                date = c(day_1, 
+                                         today)) 
+
+```
+
+How can I get the last six months' worth of data?
+
+```{r eval=FALSE, include=TRUE}
+# Get current date
+today <- Sys.Date()
+
+# Print current date
+today
+
+# Get date from 6 months ago
+date_6_months_ago <- today - months(6)
+
+# Print date from 6 months ago
+date_6_months_ago
+
+# Get data from the last 6 months
+covidBR.db <- covidBR::cbr_data(dir = here::here("data-raw"),
+                                date = c(date_6_months_ago, 
+                                         today)) 
+
+```
+
+How can I get the last 30 days' worth of data?
+
+```{r eval=FALSE, include=TRUE}
+# Get current date
+today <- Sys.Date()
+
+# Print current date
+today
+
+# Get date from 30 days ago
+date_30_days_ago <- today - lubridate::days(30)
+
+# Print date from 30 days ago
+date_30_days_ago
+
+# Get data from the last 30 days
+covidBR.db <- covidBR::cbr_data(dir = here::here("data-raw"),
+                                date = c(date_30_days_ago, 
+                                         today)) 
+```
+
+#### Data visualization
+
+```{r}
+# Obtain data for Brazil
+tidycovidBR <- covidBR.db  %>% 
+  dplyr::filter(regiao == "Brasil") 
+
+# Select the interesting columns 
+tidycovidBR <- tidycovidBR %>% 
+  dplyr::select(c(regiao, data,
+                  casos_acumulado:obitos_novos))
+
+# Tabular view 
+tidycovidBR %>% 
+  head(n = 15L) %>% 
+  knitr::kable()
+
+# Summary
+summary(tidycovidBR)
+
+# Check for duplicate dates
+length(unique(tidycovidBR$data))
+
+# Plot data
+tidycovidBR %>% 
+  dplyr::ungroup() %>% 
+  tidyr::pivot_longer(
+    cols = -c(regiao,data),
+    names_to  = "variavel",
+    values_to = "valor") %>% 
+  dplyr::mutate_at("variavel", 
+                   stringr::str_replace_all,
+                   pattern = "_",
+                   replacement = " ")  %>% 
+  ggplot(aes(x = data, y = valor)) + 
+  geom_line() + 
+  facet_wrap(~ variavel, scales = "free_y", ncol = 1) + 
+  labs(x = "Data da notificação", 
+       y = "") + 
+  theme_minimal() 
+
+```

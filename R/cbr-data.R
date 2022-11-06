@@ -10,7 +10,7 @@
 #' @param filepath a `character` string, corresponding the folder where files will
 #' be save. By default, the current directory is used
 #' (see [getwd()]).
-#' @param date a date string, in year-month-day format (e.g.:`"2022-11-06").
+#' @param date a date string, in year-month-day format (e.g.: "2022-11-06").
 #' + Data from "2022-10-06" to "2022-10-07": date = c("2022-10-06","2022-10-07")
 #'
 #' @return a `data.table` object with 17 columns, corresponding the database.
@@ -40,7 +40,7 @@ cbr_data <- function(dir = ".", filepath = ".", save2disk = FALSE, date = NULL){
       covid_br_db <- covid_br_db    %>%
         dplyr::filter(data == date)
 
-      cat(paste("Data from",date))
+      cat(paste("Data from",date,"\n"))
 
     }
     else if(length(date) == 2){
@@ -61,16 +61,21 @@ cbr_data <- function(dir = ".", filepath = ".", save2disk = FALSE, date = NULL){
                                      as.Date(date_from, "%Y-%m-%d"),
                                      as.Date(date_to, "%Y-%m-%d")))
 
-      cat(paste("Data from",date_from,"to",date_to))
+      cat(paste("Data from",date_from,"to",date_to,"\n"))
 
     }
     else{
 
       warning("Invalid date!")
-      message(paste("Data from",max(covid_br_db$data)))
+      message(paste("Data from",max(covid_br_db$data),"\n"))
 
     }
 
+    if(dim(covid_br_db)[1] < 1){
+
+      warning("No data available for this date!")
+
+    }
 
   }
 

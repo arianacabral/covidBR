@@ -17,7 +17,7 @@ be save. By default, the current directory is used
 \item{save2disk}{\code{logical}. If \link{TRUE}, the database is saved in a file in
 csv format.}
 
-\item{date}{a date string, in year-month-day format (e.g.:`"2022-11-06").
+\item{date}{a date string, in year-month-day format (e.g.: "2022-11-06").
 \itemize{
 \item Data from "2022-10-06" to "2022-10-07": date = c("2022-10-06","2022-10-07")
 }}

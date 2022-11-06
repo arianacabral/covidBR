@@ -42,7 +42,6 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/art.html">More than One Picture: An Art History of the covidBR</a>
-    <a class="dropdown-item" href="../articles/intro_covidBR.html">Introduction to covidBR</a>
     <a class="dropdown-item" href="../articles/intro_covidBR_dataset.html">Introduction to covidBR dataset</a>
   </div>
 </li>
@@ -668,7 +667,7 @@ ways.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">variavel</span>,<span class="va">data</span>,<span class="va">regiao</span>,<span class="va">estado</span>,<span class="va">municipio</span>,</span>
 <span>                  <span class="va">semana_epi</span>, <span class="va">coduf</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html" class="external-link">summarise_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">valor</span><span class="op">)</span>,</span>
-<span>                      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>valor <span class="op">=</span> <span class="va">sum</span><span class="op">)</span>, </span>
+<span>                      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>valor <span class="op">=</span> <span class="va">max</span><span class="op">)</span>, </span>
 <span>                      na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># View the data in the original structure</span></span>
@@ -726,7 +725,7 @@ ways.</p>
 <td align="right">1726577</td>
 <td align="right">888</td>
 <td align="right">27578</td>
-<td align="right">-1</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
 <td align="left">Centro-Oeste</td>
@@ -759,19 +758,19 @@ ways.</p>
 <td align="left">Nordeste</td>
 <td align="left">BA</td>
 <td align="left">2022-11-01</td>
-<td align="right">1724851</td>
-<td align="right">378</td>
-<td align="right">31148</td>
+<td align="right">1703991</td>
+<td align="right">371</td>
+<td align="right">30792</td>
 <td align="right">1</td>
 </tr>
 <tr class="even">
 <td align="left">Nordeste</td>
 <td align="left">CE</td>
 <td align="left">2022-11-01</td>
-<td align="right">1404637</td>
+<td align="right">1386482</td>
 <td align="right">47</td>
-<td align="right">28168</td>
-<td align="right">172</td>
+<td align="right">28005</td>
+<td align="right">163</td>
 </tr>
 <tr class="odd">
 <td align="left">Nordeste</td>
@@ -876,9 +875,9 @@ ways.</p>
 <td align="left">Norte</td>
 <td align="left">RR</td>
 <td align="left">2022-11-01</td>
-<td align="right">179506</td>
-<td align="right">57</td>
-<td align="right">2198</td>
+<td align="right">175526</td>
+<td align="right">46</td>
+<td align="right">2175</td>
 <td align="right">0</td>
 </tr>
 <tr class="odd">
@@ -894,18 +893,18 @@ ways.</p>
 <td align="left">Sudeste</td>
 <td align="left">ES</td>
 <td align="left">2022-11-01</td>
-<td align="right">1226652</td>
+<td align="right">1217371</td>
 <td align="right">234</td>
-<td align="right">15115</td>
+<td align="right">14834</td>
 <td align="right">4</td>
 </tr>
 <tr class="odd">
 <td align="left">Sudeste</td>
 <td align="left">MG</td>
 <td align="left">2022-11-01</td>
-<td align="right">3887761</td>
+<td align="right">3883495</td>
 <td align="right">0</td>
-<td align="right">64306</td>
+<td align="right">63879</td>
 <td align="right">0</td>
 </tr>
 <tr class="even">
@@ -921,7 +920,7 @@ ways.</p>
 <td align="left">Sudeste</td>
 <td align="left">SP</td>
 <td align="left">2022-11-01</td>
-<td align="right">6146043</td>
+<td align="right">6145825</td>
 <td align="right">2276</td>
 <td align="right">175574</td>
 <td align="right">20</td>
@@ -930,9 +929,9 @@ ways.</p>
 <td align="left">Sul</td>
 <td align="left">PR</td>
 <td align="left">2022-11-01</td>
-<td align="right">2765405</td>
-<td align="right">101</td>
-<td align="right">45691</td>
+<td align="right">2753618</td>
+<td align="right">102</td>
+<td align="right">45446</td>
 <td align="right">6</td>
 </tr>
 <tr class="odd">

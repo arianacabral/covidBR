@@ -42,7 +42,6 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="articles/art.html">More than One Picture: An Art History of the covidBR</a>
-    <a class="dropdown-item" href="articles/intro_covidBR.html">Introduction to covidBR</a>
     <a class="dropdown-item" href="articles/intro_covidBR_dataset.html">Introduction to covidBR dataset</a>
   </div>
 </li>
@@ -91,7 +90,10 @@
 </h3>
 <p>The original data comes from the Brazilian COVID-19 Portal (<strong>Portal do COVID-19</strong>), and can be found at <a href="https://covid.saude.gov.br" class="external-link uri">https://covid.saude.gov.br</a>. Daily, the Ministry of Health (Ministério da Saúde) updates and publicly disseminates the database, and, consequently, the download URL is updated.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">download_url</span> <span class="op">&lt;-</span> <span class="fu">covidBR</span><span class="fu">::</span><span class="fu"><a href="reference/cbr_download_url.html">cbr_download_url</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">download_url</span> <span class="op">&lt;-</span> <span class="fu">covidBR</span><span class="fu">::</span><span class="fu"><a href="reference/cbr_download_url.html">cbr_download_url</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">download_url</span></span>
+<span><span class="co">#&gt; [1] "https://mobileapps.saude.gov.br/esus-vepi/files/unAFkcaNDeXajurGB7LChj8SgQYS2ptm/afa2db0c2542e993d5fcccec24b33ac1_HIST_PAINEL_COVIDBR_04nov2022.rar"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="import-public-file-of-the-covid-19-portal">Import public file of the COVID-19 Portal<a class="anchor" aria-label="anchor" href="#import-public-file-of-the-covid-19-portal"></a>

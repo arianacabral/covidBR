@@ -112,7 +112,7 @@ tidycovidBR <- tidycovidBR %>%
   dplyr::group_by(variavel,data,regiao,estado,municipio,
                   semana_epi, coduf) %>% 
   dplyr::summarise_at(vars(valor),
-                      list(valor = sum), 
+                      list(valor = max), 
                       na.rm = TRUE)
 
 # View the data in the original structure

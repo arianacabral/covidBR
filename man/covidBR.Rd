@@ -14,7 +14,7 @@ A data table with 17 variables and multiple rows:
 \item{codmun}{Brazilian municipality code}
 \item{cod_regiao_saude}{Health region code}
 \item{nome_regiao_saude}{Health region name}
-\item{data}{Notification date}
+\item{data}{Notification date in year-month-day format (yyyy-mm-dd)}
 \item{semana_epi}{Epidemiological week}
 \item{populacao_tcu2019}{Population estimates sent to the TCU (2019)}
 \item{casos_acumulado}{Total number of confirmed cases of COVID-19 that

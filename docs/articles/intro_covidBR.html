@@ -130,32 +130,157 @@ updates and publicly disseminates the database, and, consequently, the
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Download public file</span></span>
 <span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">covidBR</span><span class="fu">::</span><span class="fu"><a href="../reference/cbr_download.html">cbr_download</a></span><span class="op">(</span>url_file <span class="op">=</span> <span class="va">download_url</span>,</span>
-<span>                              keep_filename <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>A <code>zip</code> file has been downloaded from the <a href="https://covid.saude.gov.br/" class="external-link">COVID-19 Portal</a>. We use the
-<code><a href="../reference/cbr_unzip.html">cbr_unzip()</a></code> function to unzip it.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Get filename</span></span>
+<span>                              dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"data-raw"</span><span class="op">)</span>, <span class="co">#saving to "data-raw" folder</span></span>
+<span>                              keep_filename <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get filename</span></span>
 <span><span class="va">filename</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path_file.html" class="external-link">path_file</a></span><span class="op">(</span><span class="va">resp</span><span class="op">$</span><span class="va">url</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Print filename</span></span>
 <span><span class="va">filename</span></span>
+<span><span class="co">#&gt; [1] "afa2db0c2542e993d5fcccec24b33ac1_HIST_PAINEL_COVIDBR_04nov2022.rar"</span></span></code></pre></div>
+<p>A <code>zip</code> file has been downloaded from the <a href="https://covid.saude.gov.br/" class="external-link">COVID-19 Portal</a>. We use the
+<code><a href="../reference/cbr_unzip.html">cbr_unzip()</a></code> function to unzip it.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Set absolute directory</span></span>
+<span><span class="va">abs_path</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html" class="external-link">str_c</a></span><span class="op">(</span></span>
+<span>  <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"data-raw"</span><span class="op">)</span>,</span>
+<span>  <span class="va">filename</span>,</span>
+<span>  sep <span class="op">=</span> <span class="st">"/"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Unzip</span></span>
-<span><span class="fu">covidBR</span><span class="fu">::</span><span class="fu"><a href="../reference/cbr_unzip.html">cbr_unzip</a></span><span class="op">(</span>zip_file <span class="op">=</span> <span class="va">filename</span>,</span>
-<span>                   keep_zip_file <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># Delete the compressed file</span></span></code></pre></div>
+<span><span class="fu">covidBR</span><span class="fu">::</span><span class="fu"><a href="../reference/cbr_unzip.html">cbr_unzip</a></span><span class="op">(</span>zip_file <span class="op">=</span> <span class="va">abs_path</span>,</span>
+<span>                   dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"data-raw"</span><span class="op">)</span>, <span class="co"># the directory to extract archive contents</span></span>
+<span>                   keep_zip_file <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># Delete the compressed file</span></span>
+<span><span class="co">#&gt; ... Unzipping file</span></span>
+<span><span class="co">#&gt; HIST_PAINEL_COVIDBR_2022_Parte2_04nov2022.csv</span></span>
+<span><span class="co">#&gt; HIST_PAINEL_COVIDBR_2020_Parte1_04nov2022.csv</span></span>
+<span><span class="co">#&gt; HIST_PAINEL_COVIDBR_2020_Parte2_04nov2022.csv</span></span>
+<span><span class="co">#&gt; HIST_PAINEL_COVIDBR_2021_Parte1_04nov2022.csv</span></span>
+<span><span class="co">#&gt; HIST_PAINEL_COVIDBR_2021_Parte2_04nov2022.csv</span></span>
+<span><span class="co">#&gt; HIST_PAINEL_COVIDBR_2022_Parte1_04nov2022.csv</span></span></code></pre></div>
 <p>Simply use the <code><a href="../reference/cbr_data.html">cbr_data()</a></code> function to combine all files
 and generate a single dataset.</p>
+<blockquote>
+<p>You can already combine the files by specifying a time range of
+interest. For example, use the argument <code>date = Sys.Date()</code>
+to retrieve today’s data.</p>
+</blockquote>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Bind multiple files</span></span>
+<span><span class="va">covidBR.db</span> <span class="op">&lt;-</span> <span class="fu">covidBR</span><span class="fu">::</span><span class="fu"><a href="../reference/cbr_data.html">cbr_data</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"data-raw"</span><span class="op">)</span><span class="op">)</span>  </span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="available-variables">Available variables<a class="anchor" aria-label="anchor" href="#available-variables"></a>
 </h3>
 <p>You can view what variables are available using the
 <code><a href="https://rdrr.io/r/utils/str.html" class="external-link">str()</a></code> function.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Display the dataset's structure</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">covidBR.db</span><span class="op">)</span></span></code></pre></div>
-<p>You can also view the data in a tabular form.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Display the dataset's structure</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">covidBR.db</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Classes 'data.table' and 'data.frame':   5355775 obs. of  17 variables:</span></span>
+<span><span class="co">#&gt;  $ regiao                 : chr  "Brasil" "Brasil" "Brasil" "Brasil" ...</span></span>
+<span><span class="co">#&gt;  $ estado                 : chr  "" "" "" "" ...</span></span>
+<span><span class="co">#&gt;  $ municipio              : chr  "" "" "" "" ...</span></span>
+<span><span class="co">#&gt;  $ coduf                  : int  76 76 76 76 76 76 76 76 76 76 ...</span></span>
+<span><span class="co">#&gt;  $ codmun                 : int  NA NA NA NA NA NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ cod_regiao_saude       : int  NA NA NA NA NA NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ nome_regiao_saude      : chr  "" "" "" "" ...</span></span>
+<span><span class="co">#&gt;  $ data                   : IDate, format: "2020-02-25" "2020-02-26" ...</span></span>
+<span><span class="co">#&gt;  $ semana_epi             : int  9 9 9 9 9 10 10 10 10 10 ...</span></span>
+<span><span class="co">#&gt;  $ populacao_tcu2019      : int  210147125 210147125 210147125 210147125 210147125 210147125 210147125 210147125 210147125 210147125 ...</span></span>
+<span><span class="co">#&gt;  $ casos_acumulado        : num  0 1 1 1 2 2 2 2 3 7 ...</span></span>
+<span><span class="co">#&gt;  $ casos_novos            : int  0 1 0 0 1 0 0 0 1 4 ...</span></span>
+<span><span class="co">#&gt;  $ obitos_acumulado       : int  0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ obitos_novos           : int  0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ recuperadosnovos       : int  0 1 1 0 1 1 0 0 1 4 ...</span></span>
+<span><span class="co">#&gt;  $ em_acompanhamento_novos: int  0 0 0 1 1 1 2 2 2 3 ...</span></span>
+<span><span class="co">#&gt;  $ interior_metropolitana : int  NA NA NA NA NA NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;externalptr&gt;</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="data-exploration">Data exploration<a class="anchor" aria-label="anchor" href="#data-exploration"></a>
+</h3>
+<p>You may be interested in specific information, and we will now
+demonstrate how to work with some case scenarios.</p>
+<p><strong>Data exploration by date</strong></p>
+<p>For this purpose, we can use the package <code>lubridate</code>. It
+is an R package that makes it easier to work with dates and times.</p>
+<blockquote>
+<p><code><a href="https://lubridate.tidyverse.org/reference" class="external-link">help(package = "lubridate")</a></code></p>
+</blockquote>
+<p>How can I get this year’s data?</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get current date</span></span>
+<span><span class="va">today</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print current date</span></span>
+<span><span class="va">today</span></span>
+<span><span class="co">#&gt; [1] "2022-11-06"</span></span>
+<span></span>
+<span><span class="co"># Get this year</span></span>
+<span><span class="va">current_year</span> <span class="op">&lt;-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html" class="external-link">year</a></span><span class="op">(</span><span class="va">today</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the current year </span></span>
+<span><span class="va">current_year</span></span>
+<span><span class="co">#&gt; [1] 2022</span></span>
+<span></span>
+<span><span class="co"># Set first day of this year</span></span>
+<span><span class="va">day_1</span> <span class="op">&lt;-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html" class="external-link">ymd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">current_year</span>,<span class="st">"01"</span>,<span class="st">"01"</span>,sep<span class="op">=</span><span class="st">"-"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the first day of this year </span></span>
+<span><span class="va">day_1</span></span>
+<span><span class="co">#&gt; [1] "2022-01-01"</span></span>
+<span></span>
+<span><span class="co"># Get data from the last ten days</span></span>
+<span><span class="va">covidBR.db</span> <span class="op">&lt;-</span> <span class="fu">covidBR</span><span class="fu">::</span><span class="fu"><a href="../reference/cbr_data.html">cbr_data</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"data-raw"</span><span class="op">)</span>,</span>
+<span>                                date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">day_1</span>, </span>
+<span>                                         <span class="va">today</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; Data from 2022-01-01 to 2022-11-06</span></span></code></pre></div>
+<p>How can I get the last six months’ worth of data?</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get current date</span></span>
+<span><span class="va">today</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print current date</span></span>
+<span><span class="va">today</span></span>
+<span><span class="co">#&gt; [1] "2022-11-06"</span></span>
+<span></span>
+<span><span class="co"># Get date from 6 months ago</span></span>
+<span><span class="va">date_6_months_ago</span> <span class="op">&lt;-</span> <span class="va">today</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/weekday.POSIXt.html" class="external-link">months</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print date from 6 months ago</span></span>
+<span><span class="va">date_6_months_ago</span></span>
+<span><span class="co">#&gt; [1] "2022-05-06"</span></span>
+<span></span>
+<span><span class="co"># Get data from the last ten days</span></span>
+<span><span class="va">covidBR.db</span> <span class="op">&lt;-</span> <span class="fu">covidBR</span><span class="fu">::</span><span class="fu"><a href="../reference/cbr_data.html">cbr_data</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"data-raw"</span><span class="op">)</span>,</span>
+<span>                                date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">date_6_months_ago</span>, </span>
+<span>                                         <span class="va">today</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; Data from 2022-05-06 to 2022-11-06</span></span></code></pre></div>
+<p>How can I get the last 30 days’ worth of data?</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get current date</span></span>
+<span><span class="va">today</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print current date</span></span>
+<span><span class="va">today</span></span>
+<span><span class="co">#&gt; [1] "2022-11-06"</span></span>
+<span></span>
+<span><span class="co"># Get date from 30 days ago</span></span>
+<span><span class="va">date_30_days_ago</span> <span class="op">&lt;-</span> <span class="va">today</span> <span class="op">-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html" class="external-link">days</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print date from 30 days ago</span></span>
+<span><span class="va">date_30_days_ago</span></span>
+<span><span class="co">#&gt; [1] "2022-10-07"</span></span>
+<span></span>
+<span><span class="co"># Get data from the last 30 days</span></span>
+<span><span class="va">covidBR.db</span> <span class="op">&lt;-</span> <span class="fu">covidBR</span><span class="fu">::</span><span class="fu"><a href="../reference/cbr_data.html">cbr_data</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"data-raw"</span><span class="op">)</span>,</span>
+<span>                                date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">date_30_days_ago</span>, </span>
+<span>                                         <span class="va">today</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; Data from 2022-10-07 to 2022-11-06</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">covidBR.db</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">data</span> <span class="op">&gt;=</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span>, <span class="co"># last 2 days</span></span>
 <span>                <span class="va">municipio</span><span class="op">==</span> <span class="st">""</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co"># only Brazilian states</span></span>

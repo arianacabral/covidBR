@@ -50,7 +50,7 @@ library(knitr)
 
 ## Meet the covidBR dataset
 
-The `covidBR::covidBR` dataset contains 17 variables for each Brazilian region, municipality, and state.
+The `covidBR` dataset contains 17 variables for each Brazilian region, municipality, and state. 
 
 > You can read more about the variables by typing `?covidBR::covidBR`.
 
@@ -66,9 +66,11 @@ You can also view the data in a tabular form.
 ```{r}
 covidBR %>%
   dplyr::filter(data >= max(data),
-                municipio== "") %>%
-  dplyr::select(-c(municipio, coduf,
-                   codmun, cod_regiao_saude,
+                municipio == "") %>%
+  dplyr::select(-c(municipio, 
+                   coduf,
+                   codmun, 
+                   cod_regiao_saude,
                    nome_regiao_saude,
                    semana_epi,
                    populacao_tcu2019,
@@ -76,6 +78,7 @@ covidBR %>%
                    em_acompanhamento_novos,
                    recuperadosnovos)) %>%
   dplyr::arrange(regiao, estado) %>% 
+  head(n = 15L) %>% 
   knitr::kable()
 ```
 
@@ -83,7 +86,7 @@ covidBR %>%
 
 ### Tidy data for more efficient data science 
 
-In this case, it is necessary to organize data to help us work in an efficient, reproducible, and collaborative way. 
+When data is duplicated, it is necessary to organize data to help us work in an efficient, reproducible, and collaborative way. 
 
 The example below shows one way to organize the data and remove duplicate elements, but you can represent this same data in several ways.
 
@@ -98,19 +101,26 @@ tidycovidBR <- tidycovidBR %>%
   dplyr::arrange(regiao, estado)  
 
 # Pivot the offending columns into a new pair of variables
-tidycovidBR <- tidycovidBR %>% tidyr::pivot_longer(
-  cols = c(populacao_tcu2019:interior_metropolitana,codmun),
+tidycovidBR <- tidycovidBR %>% 
+  tidyr::pivot_longer(
+  cols = c(populacao_tcu2019:interior_metropolitana,
+           codmun),
   names_to  = "variavel",
   values_to = "valor")
 
 # Select the interesting columns
 tidycovidBR <- tidycovidBR %>% 
-  dplyr::select(-c(cod_regiao_saude,nome_regiao_saude))
+  dplyr::select(-c(cod_regiao_saude, nome_regiao_saude))
 
 # Aggregate the duplicate columns
 tidycovidBR <- tidycovidBR %>% 
-  dplyr::group_by(variavel,data,regiao,estado,municipio,
-                  semana_epi, coduf) %>% 
+  dplyr::group_by(variavel,
+                  data,
+                  regiao,
+                  estado,
+                  municipio,
+                  semana_epi,
+                  coduf) %>% 
   dplyr::summarise_at(vars(valor),
                       list(valor = max), 
                       na.rm = TRUE)
@@ -120,10 +130,15 @@ tidycovidBR %>%
   tidyr::pivot_wider(names_from = variavel, 
                      values_from = valor) %>%
   dplyr::ungroup() %>%  
-  dplyr::select(c(regiao,estado,data,
-                  casos_acumulado,casos_novos,
-                  obitos_acumulado, obitos_novos)) %>% 
+  dplyr::select(c(regiao,
+                  estado,
+                  data,
+                  casos_acumulado,
+                  casos_novos,
+                  obitos_acumulado,
+                  obitos_novos)) %>% 
   dplyr::arrange(regiao, estado, data) %>% 
+  head(n = 15L) %>% 
   knitr::kable()
 
 ```
@@ -153,4 +168,3 @@ tidycovidBR  %>%
   theme_minimal() + 
   theme(legend.position = "none")
 ```
-

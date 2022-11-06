@@ -26,6 +26,7 @@ Imports:
     fs,
     httr,
     janitor,
+    lubridate,
     magrittr,
     purrr,
     stringi,

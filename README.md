@@ -43,6 +43,9 @@ updated.
 
 ``` r
 download_url <- covidBR::cbr_download_url()
+
+download_url
+#> [1] "https://mobileapps.saude.gov.br/esus-vepi/files/unAFkcaNDeXajurGB7LChj8SgQYS2ptm/afa2db0c2542e993d5fcccec24b33ac1_HIST_PAINEL_COVIDBR_04nov2022.rar"
 ```
 
 ### Import public file of the COVID-19 Portal

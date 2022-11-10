@@ -13,4 +13,5 @@
 #' @return The result of calling `rhs(lhs)`.
 NULL
 
-globalVariables("data")
+globalVariables(c("data",
+                  "covidBR"))

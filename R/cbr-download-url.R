@@ -11,23 +11,14 @@
 #'
 #' @export
 #'
-#' @seealso
-#'   [httr::GET()], [httr::content()]
-#'
 #' @examples
 #'  \dontrun{cbr_download_url()}
 #'
 cbr_download_url <- function(){
 
-  gov_url <- "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalGeral"
+  info <- cbr_get_web_info()
 
-  info_pg <- httr::GET(
-    gov_url,
-    httr::add_headers("x-parse-application-id" = "unAFkcaNDeXajurGB7LChj8SgQYS2ptm")
-  ) %>%
-    httr::content()
-
-  download_url <- info_pg$results[[1]]$arquivo$url
+  download_url <- info$results$arquivo$url
 
   return(download_url)
 

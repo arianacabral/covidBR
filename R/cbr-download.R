@@ -17,6 +17,8 @@
 #' @param show_progress `logical`. If [TRUE], the default, shows a progress bar
 #' for uploading.
 #'
+#' @seealso [httr::RETRY()], [httr::GET()]
+#'
 #' @export
 #'
 #' @examples

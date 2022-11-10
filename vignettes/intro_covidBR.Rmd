@@ -121,7 +121,7 @@ For this purpose, we can use the package `lubridate`. It is an R package that ma
 
 How can I get this year's data?
 
-```{r eval=FALSE, include=FALSE}
+```{r eval=TRUE, include=TRUE}
 # Get current date
 today <- Sys.Date()
 
@@ -141,15 +141,24 @@ day_1 <- lubridate::ymd(paste0(current_year,"01","01",sep="-"))
 day_1
 
 # Get this year's data
-covidBR.db <- covidBR::cbr_data(dir = here::here("data-raw"),
+covidBR.db <- covidBR::cbr_data(dir = here::here("./inst/extdata"),
                                 date = c(day_1, 
                                          today)) 
 
+# Tabular view
+covidBR.db %>% 
+  dplyr::select(regiao, 
+                data,
+                casos_acumulado,
+                casos_novos, 
+                obitos_novos) %>% 
+  head(n = 10L) %>% 
+  knitr::kable() 
 ```
 
 How can I get the last six months' worth of data?
 
-```{r eval=FALSE, include=TRUE}
+```{r eval=TRUE, include=TRUE}
 # Get current date
 today <- Sys.Date()
 
@@ -163,15 +172,24 @@ date_6_months_ago <- today - months(6)
 date_6_months_ago
 
 # Get data from the last 6 months
-covidBR.db <- covidBR::cbr_data(dir = here::here("data-raw"),
-                                date = c(date_6_months_ago, 
-                                         today)) 
+covidBR.db <- covidBR::cbr_data(dir = here::here("./inst/extdata"),
+                                date = c(date_6_months_ago,today)) 
+
+# Tabular view
+covidBR.db %>% 
+  dplyr::select(regiao, 
+                data,
+                casos_acumulado,
+                casos_novos, 
+                obitos_novos) %>% 
+  head(n = 10L) %>% 
+  knitr::kable()
 
 ```
 
 How can I get the last 30 days' worth of data?
 
-```{r eval=FALSE, include=TRUE}
+```{r eval=TRUE, include=TRUE}
 # Get current date
 today <- Sys.Date()
 
@@ -185,16 +203,26 @@ date_30_days_ago <- today - lubridate::days(30)
 date_30_days_ago
 
 # Get data from the last 30 days
-covidBR.db <- covidBR::cbr_data(dir = here::here("data-raw"),
-                                date = c(date_30_days_ago, 
-                                         today)) 
+covidBR.db <- covidBR::cbr_data(dir = here::here("./inst/extdata"),
+                                date = c(date_30_days_ago, today)) 
+
+# Tabular view
+covidBR.db %>% 
+  dplyr::select(regiao, 
+                data,
+                casos_acumulado,
+                casos_novos, 
+                obitos_novos) %>% 
+  head(n = 10L) %>% 
+  knitr::kable()
 ```
 
 #### Data visualization
 
 ```{r}
 # Obtain data for Brazil
-tidycovidBR <- covidBR.db  %>% 
+tidycovidBR <- covidBR::cbr_data(
+  dir = here::here("inst/extdata"))  %>% 
   dplyr::filter(regiao == "Brasil") 
 
 # Select the interesting columns 
@@ -211,10 +239,12 @@ tidycovidBR %>%
 summary(tidycovidBR)
 
 # Check for duplicate dates
-length(unique(tidycovidBR$data))
+is_unique <- length(unique(tidycovidBR$data)) == length(tidycovidBR$data)
 
 # Plot data
-tidycovidBR %>% 
+if(is_unique){
+  
+  tidycovidBR %>% 
   dplyr::ungroup() %>% 
   tidyr::pivot_longer(
     cols = -c(regiao,data),
@@ -230,5 +260,7 @@ tidycovidBR %>%
   labs(x = "Data da notificação", 
        y = "") + 
   theme_minimal() 
+  
+}
 
 ```

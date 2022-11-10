@@ -56,3 +56,6 @@ cbr_download(url_file = download_url, dir = "./myfolder")
 
 }
 }
+\seealso{
+\code{\link[httr:RETRY]{httr::RETRY()}}, \code{\link[httr:GET]{httr::GET()}}
+}

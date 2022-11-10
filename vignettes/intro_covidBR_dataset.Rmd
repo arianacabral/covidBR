@@ -22,7 +22,7 @@ The `covid` R package includes a dataset containing **COVID-19** epidemiological
 The original data comes from the Brazilian COVID-19 Portal (**Portal do COVID-19**), and can be found at <https://covid.saude.gov.br>. Daily, the Ministry of Health (**Ministério da Saúde**) updates and publicly disseminates the database. In this context, the `covidBR` R package was built to extract data from the Brazilian COVID-19 Portal.  
 
 This package contains a dataset called `covidBR`.
-Furthermore, it provides raw data, downloaded from the COVID-19 Portal, in `CSV` format files (access [here](https://github.com/arianacabral/covidBR/tree/master/data-raw)). 
+Furthermore, it provides raw data, downloaded from the COVID-19 Portal, in `CSV` format files (access [here](https://github.com/arianacabral/covidBR/tree/master/inst/extdata)). 
 
 ### Installation 
 

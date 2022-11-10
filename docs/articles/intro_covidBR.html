@@ -126,7 +126,7 @@ updates and publicly disseminates the database, and, consequently, the
 <span></span>
 <span><span class="co"># Print URL</span></span>
 <span><span class="va">download_url</span></span>
-<span><span class="co">#&gt; [1] "https://mobileapps.saude.gov.br/esus-vepi/files/unAFkcaNDeXajurGB7LChj8SgQYS2ptm/afa2db0c2542e993d5fcccec24b33ac1_HIST_PAINEL_COVIDBR_04nov2022.rar"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "https://mobileapps.saude.gov.br/esus-vepi/files/unAFkcaNDeXajurGB7LChj8SgQYS2ptm/1b386b80cf23162edda1a942b9832380_HIST_PAINEL_COVIDBR_07nov2022.rar"</span></span></code></pre></div>
 <p>Now let’s download the public file available at the obtained URL.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Download public file</span></span>
@@ -172,7 +172,7 @@ to retrieve today’s data.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display the dataset's structure</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">covidBR.db</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Classes 'data.table' and 'data.frame':   713613 obs. of  17 variables:</span></span>
+<span><span class="co">#&gt; Classes 'data.table' and 'data.frame':   5372632 obs. of  17 variables:</span></span>
 <span><span class="co">#&gt;  $ regiao                 : chr  "Brasil" "Brasil" "Brasil" "Brasil" ...</span></span>
 <span><span class="co">#&gt;  $ estado                 : chr  "" "" "" "" ...</span></span>
 <span><span class="co">#&gt;  $ municipio              : chr  "" "" "" "" ...</span></span>
@@ -180,15 +180,15 @@ to retrieve today’s data.</p>
 <span><span class="co">#&gt;  $ codmun                 : int  NA NA NA NA NA NA NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ cod_regiao_saude       : int  NA NA NA NA NA NA NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ nome_regiao_saude      : chr  "" "" "" "" ...</span></span>
-<span><span class="co">#&gt;  $ data                   : IDate, format: "2022-07-01" "2022-07-02" ...</span></span>
-<span><span class="co">#&gt;  $ semana_epi             : int  26 26 27 27 27 27 27 27 27 28 ...</span></span>
+<span><span class="co">#&gt;  $ data                   : IDate, format: "2020-02-25" "2020-02-26" ...</span></span>
+<span><span class="co">#&gt;  $ semana_epi             : int  9 9 9 9 9 10 10 10 10 10 ...</span></span>
 <span><span class="co">#&gt;  $ populacao_tcu2019      : int  210147125 210147125 210147125 210147125 210147125 210147125 210147125 210147125 210147125 210147125 ...</span></span>
-<span><span class="co">#&gt;  $ casos_acumulado        : int  32434063 32471847 32490422 32535923 32610514 32687680 32759730 32830844 32874501 32896464 ...</span></span>
-<span><span class="co">#&gt;  $ casos_novos            : int  76045 37784 18575 45501 74591 77166 72050 71114 43657 21963 ...</span></span>
-<span><span class="co">#&gt;  $ obitos_acumulado       : int  671700 671858 671911 672033 672429 672790 673073 673339 673554 673610 ...</span></span>
-<span><span class="co">#&gt;  $ obitos_novos           : int  284 158 53 122 396 361 283 266 215 56 ...</span></span>
-<span><span class="co">#&gt;  $ recuperadosnovos       : int  30873682 30880584 30906575 30967114 31039055 31077538 31094805 31119463 31142535 31181066 ...</span></span>
-<span><span class="co">#&gt;  $ em_acompanhamento_novos: int  888681 919405 911936 896776 899030 937352 991852 1038042 1058412 1041788 ...</span></span>
+<span><span class="co">#&gt;  $ casos_acumulado        : num  0 1 1 1 2 2 2 2 3 7 ...</span></span>
+<span><span class="co">#&gt;  $ casos_novos            : int  0 1 0 0 1 0 0 0 1 4 ...</span></span>
+<span><span class="co">#&gt;  $ obitos_acumulado       : int  0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ obitos_novos           : int  0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ recuperadosnovos       : int  0 1 1 0 1 1 0 0 1 4 ...</span></span>
+<span><span class="co">#&gt;  $ em_acompanhamento_novos: int  0 0 0 1 1 1 2 2 2 3 ...</span></span>
 <span><span class="co">#&gt;  $ interior_metropolitana : int  NA NA NA NA NA NA NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;externalptr&gt;</span></span></code></pre></div>
 </div>
@@ -206,49 +206,354 @@ is an R package that makes it easier to work with dates and times.</p>
 <p>See <code><a href="https://lubridate.tidyverse.org/reference" class="external-link">help(package = "lubridate")</a></code>.</p>
 </blockquote>
 <p>How can I get this year’s data?</p>
-<p>How can I get the last six months’ worth of data?</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get current date</span></span>
 <span><span class="va">today</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Print current date</span></span>
 <span><span class="va">today</span></span>
+<span><span class="co">#&gt; [1] "2022-11-09"</span></span>
 <span></span>
-<span><span class="co"># Get date from 6 months ago</span></span>
-<span><span class="va">date_6_months_ago</span> <span class="op">&lt;-</span> <span class="va">today</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/weekday.POSIXt.html" class="external-link">months</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span></span>
+<span><span class="co"># Get this year</span></span>
+<span><span class="va">current_year</span> <span class="op">&lt;-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html" class="external-link">year</a></span><span class="op">(</span><span class="va">today</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Print date from 6 months ago</span></span>
-<span><span class="va">date_6_months_ago</span></span>
+<span><span class="co"># Print the current year </span></span>
+<span><span class="va">current_year</span></span>
+<span><span class="co">#&gt; [1] 2022</span></span>
 <span></span>
-<span><span class="co"># Get data from the last 6 months</span></span>
-<span><span class="va">covidBR.db</span> <span class="op">&lt;-</span> <span class="fu">covidBR</span><span class="fu">::</span><span class="fu"><a href="../reference/cbr_data.html">cbr_data</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"data-raw"</span><span class="op">)</span>,</span>
-<span>                                date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">date_6_months_ago</span>, </span>
-<span>                                         <span class="va">today</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<p>How can I get the last 30 days’ worth of data?</p>
+<span><span class="co"># Set first day of this year</span></span>
+<span><span class="va">day_1</span> <span class="op">&lt;-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html" class="external-link">ymd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">current_year</span>,<span class="st">"01"</span>,<span class="st">"01"</span>,sep<span class="op">=</span><span class="st">"-"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the first day of this year </span></span>
+<span><span class="va">day_1</span></span>
+<span><span class="co">#&gt; [1] "2022-01-01"</span></span>
+<span></span>
+<span><span class="co"># Get this year's data</span></span>
+<span><span class="va">covidBR.db</span> <span class="op">&lt;-</span> <span class="fu">covidBR</span><span class="fu">::</span><span class="fu"><a href="../reference/cbr_data.html">cbr_data</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"./inst/extdata"</span><span class="op">)</span>,</span>
+<span>                                date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">day_1</span>, </span>
+<span>                                         <span class="va">today</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; Data from 2022-01-01 to 2022-11-09</span></span>
+<span></span>
+<span><span class="co"># Tabular view</span></span>
+<span><span class="va">covidBR.db</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">regiao</span>, </span>
+<span>                <span class="va">data</span>,</span>
+<span>                <span class="va">casos_acumulado</span>,</span>
+<span>                <span class="va">casos_novos</span>, </span>
+<span>                <span class="va">obitos_novos</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10L</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">regiao</th>
+<th align="left">data</th>
+<th align="right">casos_acumulado</th>
+<th align="right">casos_novos</th>
+<th align="right">obitos_novos</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left">2022-01-01</td>
+<td align="right">22291507</td>
+<td align="right">3986</td>
+<td align="right">49</td>
+</tr>
+<tr class="even">
+<td align="left">Brasil</td>
+<td align="left">2022-01-02</td>
+<td align="right">22293228</td>
+<td align="right">1721</td>
+<td align="right">28</td>
+</tr>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left">2022-01-03</td>
+<td align="right">22305078</td>
+<td align="right">11850</td>
+<td align="right">76</td>
+</tr>
+<tr class="even">
+<td align="left">Brasil</td>
+<td align="left">2022-01-04</td>
+<td align="right">22323837</td>
+<td align="right">18759</td>
+<td align="right">175</td>
+</tr>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left">2022-01-05</td>
+<td align="right">22351104</td>
+<td align="right">27267</td>
+<td align="right">129</td>
+</tr>
+<tr class="even">
+<td align="left">Brasil</td>
+<td align="left">2022-01-06</td>
+<td align="right">22386930</td>
+<td align="right">35826</td>
+<td align="right">128</td>
+</tr>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left">2022-01-07</td>
+<td align="right">22450222</td>
+<td align="right">63292</td>
+<td align="right">181</td>
+</tr>
+<tr class="even">
+<td align="left">Brasil</td>
+<td align="left">2022-01-08</td>
+<td align="right">22499525</td>
+<td align="right">49303</td>
+<td align="right">115</td>
+</tr>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left">2022-01-09</td>
+<td align="right">22523907</td>
+<td align="right">24382</td>
+<td align="right">44</td>
+</tr>
+<tr class="even">
+<td align="left">Brasil</td>
+<td align="left">2022-01-10</td>
+<td align="right">22558695</td>
+<td align="right">34788</td>
+<td align="right">110</td>
+</tr>
+</tbody>
+</table>
+<p>How can I get the last six months’ worth of data?</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get current date</span></span>
 <span><span class="va">today</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Print current date</span></span>
 <span><span class="va">today</span></span>
+<span><span class="co">#&gt; [1] "2022-11-09"</span></span>
+<span></span>
+<span><span class="co"># Get date from 6 months ago</span></span>
+<span><span class="va">date_6_months_ago</span> <span class="op">&lt;-</span> <span class="va">today</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/weekday.POSIXt.html" class="external-link">months</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print date from 6 months ago</span></span>
+<span><span class="va">date_6_months_ago</span></span>
+<span><span class="co">#&gt; [1] "2022-05-09"</span></span>
+<span></span>
+<span><span class="co"># Get data from the last 6 months</span></span>
+<span><span class="va">covidBR.db</span> <span class="op">&lt;-</span> <span class="fu">covidBR</span><span class="fu">::</span><span class="fu"><a href="../reference/cbr_data.html">cbr_data</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"./inst/extdata"</span><span class="op">)</span>,</span>
+<span>                                date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">date_6_months_ago</span>,<span class="va">today</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; Data from 2022-05-09 to 2022-11-09</span></span>
+<span></span>
+<span><span class="co"># Tabular view</span></span>
+<span><span class="va">covidBR.db</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">regiao</span>, </span>
+<span>                <span class="va">data</span>,</span>
+<span>                <span class="va">casos_acumulado</span>,</span>
+<span>                <span class="va">casos_novos</span>, </span>
+<span>                <span class="va">obitos_novos</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10L</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">regiao</th>
+<th align="left">data</th>
+<th align="right">casos_acumulado</th>
+<th align="right">casos_novos</th>
+<th align="right">obitos_novos</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left">2022-05-09</td>
+<td align="right">30574245</td>
+<td align="right">9709</td>
+<td align="right">53</td>
+</tr>
+<tr class="even">
+<td align="left">Brasil</td>
+<td align="left">2022-05-10</td>
+<td align="right">30594388</td>
+<td align="right">20143</td>
+<td align="right">198</td>
+</tr>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left">2022-05-11</td>
+<td align="right">30617786</td>
+<td align="right">23398</td>
+<td align="right">126</td>
+</tr>
+<tr class="even">
+<td align="left">Brasil</td>
+<td align="left">2022-05-12</td>
+<td align="right">30639130</td>
+<td align="right">21344</td>
+<td align="right">125</td>
+</tr>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left">2022-05-13</td>
+<td align="right">30664739</td>
+<td align="right">25609</td>
+<td align="right">139</td>
+</tr>
+<tr class="even">
+<td align="left">Brasil</td>
+<td align="left">2022-05-14</td>
+<td align="right">30682094</td>
+<td align="right">17355</td>
+<td align="right">92</td>
+</tr>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left">2022-05-15</td>
+<td align="right">30688390</td>
+<td align="right">6296</td>
+<td align="right">46</td>
+</tr>
+<tr class="even">
+<td align="left">Brasil</td>
+<td align="left">2022-05-16</td>
+<td align="right">30701900</td>
+<td align="right">13510</td>
+<td align="right">69</td>
+</tr>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left">2022-05-17</td>
+<td align="right">30728286</td>
+<td align="right">26386</td>
+<td align="right">229</td>
+</tr>
+<tr class="even">
+<td align="left">Brasil</td>
+<td align="left">2022-05-18</td>
+<td align="right">30741811</td>
+<td align="right">13525</td>
+<td align="right">103</td>
+</tr>
+</tbody>
+</table>
+<p>How can I get the last 30 days’ worth of data?</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get current date</span></span>
+<span><span class="va">today</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print current date</span></span>
+<span><span class="va">today</span></span>
+<span><span class="co">#&gt; [1] "2022-11-09"</span></span>
 <span></span>
 <span><span class="co"># Get date from 30 days ago</span></span>
 <span><span class="va">date_30_days_ago</span> <span class="op">&lt;-</span> <span class="va">today</span> <span class="op">-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html" class="external-link">days</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Print date from 30 days ago</span></span>
 <span><span class="va">date_30_days_ago</span></span>
+<span><span class="co">#&gt; [1] "2022-10-10"</span></span>
 <span></span>
 <span><span class="co"># Get data from the last 30 days</span></span>
-<span><span class="va">covidBR.db</span> <span class="op">&lt;-</span> <span class="fu">covidBR</span><span class="fu">::</span><span class="fu"><a href="../reference/cbr_data.html">cbr_data</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"data-raw"</span><span class="op">)</span>,</span>
-<span>                                date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">date_30_days_ago</span>, </span>
-<span>                                         <span class="va">today</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+<span><span class="va">covidBR.db</span> <span class="op">&lt;-</span> <span class="fu">covidBR</span><span class="fu">::</span><span class="fu"><a href="../reference/cbr_data.html">cbr_data</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"./inst/extdata"</span><span class="op">)</span>,</span>
+<span>                                date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">date_30_days_ago</span>, <span class="va">today</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; Data from 2022-10-10 to 2022-11-09</span></span>
+<span></span>
+<span><span class="co"># Tabular view</span></span>
+<span><span class="va">covidBR.db</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">regiao</span>, </span>
+<span>                <span class="va">data</span>,</span>
+<span>                <span class="va">casos_acumulado</span>,</span>
+<span>                <span class="va">casos_novos</span>, </span>
+<span>                <span class="va">obitos_novos</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10L</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">regiao</th>
+<th align="left">data</th>
+<th align="right">casos_acumulado</th>
+<th align="right">casos_novos</th>
+<th align="right">obitos_novos</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left">2022-10-10</td>
+<td align="right">34724189</td>
+<td align="right">4682</td>
+<td align="right">26</td>
+</tr>
+<tr class="even">
+<td align="left">Brasil</td>
+<td align="left">2022-10-11</td>
+<td align="right">34731539</td>
+<td align="right">7350</td>
+<td align="right">86</td>
+</tr>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left">2022-10-12</td>
+<td align="right">34736653</td>
+<td align="right">5114</td>
+<td align="right">63</td>
+</tr>
+<tr class="even">
+<td align="left">Brasil</td>
+<td align="left">2022-10-13</td>
+<td align="right">34739865</td>
+<td align="right">3212</td>
+<td align="right">43</td>
+</tr>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left">2022-10-14</td>
+<td align="right">34746462</td>
+<td align="right">6597</td>
+<td align="right">75</td>
+</tr>
+<tr class="even">
+<td align="left">Brasil</td>
+<td align="left">2022-10-15</td>
+<td align="right">34748678</td>
+<td align="right">2216</td>
+<td align="right">9</td>
+</tr>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left">2022-10-16</td>
+<td align="right">34749058</td>
+<td align="right">380</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">Brasil</td>
+<td align="left">2022-10-17</td>
+<td align="right">34754590</td>
+<td align="right">5532</td>
+<td align="right">88</td>
+</tr>
+<tr class="odd">
+<td align="left">Brasil</td>
+<td align="left">2022-10-18</td>
+<td align="right">34762873</td>
+<td align="right">8283</td>
+<td align="right">83</td>
+</tr>
+<tr class="even">
+<td align="left">Brasil</td>
+<td align="left">2022-10-19</td>
+<td align="right">34771320</td>
+<td align="right">8447</td>
+<td align="right">97</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level4">
 <h4 id="data-visualization">Data visualization<a class="anchor" aria-label="anchor" href="#data-visualization"></a>
 </h4>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Obtain data for Brazil</span></span>
-<span><span class="va">tidycovidBR</span> <span class="op">&lt;-</span> <span class="va">covidBR.db</span>  <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">tidycovidBR</span> <span class="op">&lt;-</span> <span class="fu">covidBR</span><span class="fu">::</span><span class="fu"><a href="../reference/cbr_data.html">cbr_data</a></span><span class="op">(</span></span>
+<span>  dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"inst/extdata"</span><span class="op">)</span><span class="op">)</span>  <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">regiao</span> <span class="op">==</span> <span class="st">"Brasil"</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="co"># Select the interesting columns </span></span>
@@ -280,151 +585,152 @@ is an R package that makes it easier to work with dates and times.</p>
 <tbody>
 <tr class="odd">
 <td align="left">Brasil</td>
-<td align="left">2022-07-01</td>
-<td align="right">32434063</td>
-<td align="right">76045</td>
-<td align="right">671700</td>
-<td align="right">284</td>
+<td align="left">2020-02-25</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
 <td align="left">Brasil</td>
-<td align="left">2022-07-02</td>
-<td align="right">32471847</td>
-<td align="right">37784</td>
-<td align="right">671858</td>
-<td align="right">158</td>
+<td align="left">2020-02-26</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">Brasil</td>
-<td align="left">2022-07-03</td>
-<td align="right">32490422</td>
-<td align="right">18575</td>
-<td align="right">671911</td>
-<td align="right">53</td>
+<td align="left">2020-02-27</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
 <td align="left">Brasil</td>
-<td align="left">2022-07-04</td>
-<td align="right">32535923</td>
-<td align="right">45501</td>
-<td align="right">672033</td>
-<td align="right">122</td>
+<td align="left">2020-02-28</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">Brasil</td>
-<td align="left">2022-07-05</td>
-<td align="right">32610514</td>
-<td align="right">74591</td>
-<td align="right">672429</td>
-<td align="right">396</td>
+<td align="left">2020-02-29</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
 <td align="left">Brasil</td>
-<td align="left">2022-07-06</td>
-<td align="right">32687680</td>
-<td align="right">77166</td>
-<td align="right">672790</td>
-<td align="right">361</td>
+<td align="left">2020-03-01</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">Brasil</td>
-<td align="left">2022-07-07</td>
-<td align="right">32759730</td>
-<td align="right">72050</td>
-<td align="right">673073</td>
-<td align="right">283</td>
+<td align="left">2020-03-02</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
 <td align="left">Brasil</td>
-<td align="left">2022-07-08</td>
-<td align="right">32830844</td>
-<td align="right">71114</td>
-<td align="right">673339</td>
-<td align="right">266</td>
+<td align="left">2020-03-03</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">Brasil</td>
-<td align="left">2022-07-09</td>
-<td align="right">32874501</td>
-<td align="right">43657</td>
-<td align="right">673554</td>
-<td align="right">215</td>
+<td align="left">2020-03-04</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
 <td align="left">Brasil</td>
-<td align="left">2022-07-10</td>
-<td align="right">32896464</td>
-<td align="right">21963</td>
-<td align="right">673610</td>
-<td align="right">56</td>
+<td align="left">2020-03-05</td>
+<td align="right">7</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">Brasil</td>
-<td align="left">2022-07-11</td>
-<td align="right">32940507</td>
-<td align="right">44043</td>
-<td align="right">673758</td>
-<td align="right">148</td>
+<td align="left">2020-03-06</td>
+<td align="right">13</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
 <td align="left">Brasil</td>
-<td align="left">2022-07-12</td>
-<td align="right">33004555</td>
-<td align="right">64048</td>
-<td align="right">674102</td>
-<td align="right">344</td>
+<td align="left">2020-03-07</td>
+<td align="right">19</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">Brasil</td>
-<td align="left">2022-07-13</td>
-<td align="right">33076779</td>
-<td align="right">72224</td>
-<td align="right">674482</td>
-<td align="right">380</td>
+<td align="left">2020-03-08</td>
+<td align="right">25</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
 <td align="left">Brasil</td>
-<td align="left">2022-07-14</td>
-<td align="right">33142158</td>
-<td align="right">65379</td>
-<td align="right">674779</td>
-<td align="right">297</td>
+<td align="left">2020-03-09</td>
+<td align="right">25</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">Brasil</td>
-<td align="left">2022-07-15</td>
-<td align="right">33250117</td>
-<td align="right">107959</td>
-<td align="right">675090</td>
-<td align="right">311</td>
+<td align="left">2020-03-10</td>
+<td align="right">34</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Summary</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">tidycovidBR</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     regiao               data            casos_acumulado     casos_novos    </span></span>
-<span><span class="co">#&gt;  Length:127         Min.   :2022-07-01   Min.   :32434063   Min.   :   380  </span></span>
-<span><span class="co">#&gt;  Class :character   1st Qu.:2022-08-01   1st Qu.:33873196   1st Qu.:  6042  </span></span>
-<span><span class="co">#&gt;  Mode  :character   Median :2022-09-02   Median :34456145   Median :  9931  </span></span>
-<span><span class="co">#&gt;                     Mean   :2022-09-02   Mean   :34194377   Mean   : 19615  </span></span>
-<span><span class="co">#&gt;                     3rd Qu.:2022-10-03   3rd Qu.:34688212   3rd Qu.: 24780  </span></span>
-<span><span class="co">#&gt;                     Max.   :2022-11-04   Max.   :34849063   Max.   :107959  </span></span>
-<span><span class="co">#&gt;  obitos_acumulado  obitos_novos  </span></span>
-<span><span class="co">#&gt;  Min.   :671700   Min.   :  1.0  </span></span>
-<span><span class="co">#&gt;  1st Qu.:678863   1st Qu.: 51.5  </span></span>
-<span><span class="co">#&gt;  Median :684262   Median : 97.0  </span></span>
-<span><span class="co">#&gt;  Mean   :682473   Mean   :133.2  </span></span>
-<span><span class="co">#&gt;  3rd Qu.:686418   3rd Qu.:204.0  </span></span>
-<span><span class="co">#&gt;  Max.   :688332   Max.   :396.0</span></span>
+<span><span class="co">#&gt;  Length:987         Min.   :2020-02-25   Min.   :       0   Min.   :  -573  </span></span>
+<span><span class="co">#&gt;  Class :character   1st Qu.:2020-10-28   1st Qu.: 5481323   1st Qu.: 11046  </span></span>
+<span><span class="co">#&gt;  Mode  :character   Median :2021-07-02   Median :18687469   Median : 26749  </span></span>
+<span><span class="co">#&gt;                     Mean   :2021-07-02   Mean   :16979975   Mean   : 35315  </span></span>
+<span><span class="co">#&gt;                     3rd Qu.:2022-03-05   3rd Qu.:29041032   3rd Qu.: 49784  </span></span>
+<span><span class="co">#&gt;                     Max.   :2022-11-07   Max.   :34855492   Max.   :298408  </span></span>
+<span><span class="co">#&gt;  obitos_acumulado  obitos_novos   </span></span>
+<span><span class="co">#&gt;  Min.   :     0   Min.   :   0.0  </span></span>
+<span><span class="co">#&gt;  1st Qu.:158713   1st Qu.: 150.0  </span></span>
+<span><span class="co">#&gt;  Median :521952   Median : 451.0  </span></span>
+<span><span class="co">#&gt;  Mean   :408614   Mean   : 697.5  </span></span>
+<span><span class="co">#&gt;  3rd Qu.:652035   3rd Qu.:1023.0  </span></span>
+<span><span class="co">#&gt;  Max.   :688395   Max.   :4249.0</span></span>
 <span></span>
 <span><span class="co"># Check for duplicate dates</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">tidycovidBR</span><span class="op">$</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 127</span></span>
+<span><span class="va">is_unique</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">tidycovidBR</span><span class="op">$</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">tidycovidBR</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Plot data</span></span>
-<span><span class="va">tidycovidBR</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="kw">if</span><span class="op">(</span><span class="va">is_unique</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">tidycovidBR</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span></span>
 <span>    cols <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">regiao</span>,<span class="va">data</span><span class="op">)</span>,</span>
@@ -439,7 +745,9 @@ is an R package that makes it easier to work with dates and times.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">variavel</span>, scales <span class="op">=</span> <span class="st">"free_y"</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Data da notificação"</span>, </span>
 <span>       y <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span>  </span>
+<span><span class="op">}</span></span></code></pre></div>
 <p><img src="intro_covidBR_files/figure-html/unnamed-chunk-11-1.png" width="100%"></p>
 </div>
 </div>

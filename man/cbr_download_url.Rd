@@ -21,6 +21,3 @@ address of the web page and returns the URL download for the public file.
  \dontrun{cbr_download_url()}
 
 }
-\seealso{
-\code{\link[httr:GET]{httr::GET()}}, \code{\link[httr:content]{httr::content()}}
-}

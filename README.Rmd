@@ -24,6 +24,7 @@ knitr::opts_chunk$set(
 
 The `covidBR` R package, written by [Ariana Moura Cabral](https://orcid.org/0000-0002-9804-353X) and [Adriano de Oliveira Andrade](https://orcid.org/0000-0002-5689-6606), was built to extract data from the Brazilian [COVID-19 Portal](https://covid.saude.gov.br) and exported as `CSV` files.
 
+
 ### Installation
 
 You can install the development version of `covidBR` from [GitHub](https://github.com/) with:
